@@ -34,6 +34,15 @@ export const IcoJavaScript = ({ size = 36, color = '#F7DF1E', className }: IconP
   </svg>
 );
 
+export const IcoReact = ({ size = 36, color = '#61DAFB', className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" className={className} aria-hidden="true">
+    <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(0 12 12)" />
+    <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)" />
+    <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)" />
+    <circle cx="12" cy="12" r="2" fill={color} />
+  </svg>
+);
+
 export const IcoMaterialUI = ({ size = 36, color = '#007FFF', className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={color} className={className} aria-hidden="true">
     <path d="M8.5 6.5v7.5L12 16l3.5-2V6.5L12 4.5 8.5 6.5zM0 8.5L3.5 6.5v7L12 18l8.5-4.5v-7L24 8.5v7L12 22 0 15.5v-7z" />
@@ -56,6 +65,12 @@ export const IcoGit = ({ size = 36, color = '#F05032', className }: IconProps) =
 export const IcoGitea = ({ size = 36, color = '#609926', className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={color} className={className} aria-hidden="true">
     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+  </svg>
+);
+
+export const IcoAngular = ({ size = 36, color = '#DD0031', className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color} className={className} aria-hidden="true">
+    <path d="M12 2.5L2.6 5.8l1.4 12.3L12 21.5l8-3.4 1.4-12.3L12 2.5zm0 3.6l4.2 9.5h-1.9l-.9-2.1H10.6l-.9 2.1H7.8L12 6.1zm1 5.7L12 8.6l-1 3.2h2z" />
   </svg>
 );
 
@@ -82,5 +97,11 @@ export const IcoFigma = ({ size = 36, color = '#F24E1E', className }: IconProps)
 export const IcoJira = ({ size = 36, color = '#0052CC', className }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={color} className={className} aria-hidden="true">
     <path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.004-1.005zm5.723-5.756H5.757a5.215 5.215 0 0 0 5.214 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.762a1.005 1.005 0 0 0-1.021-1.005zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24.018 12.49V1.005A1.005 1.005 0 0 0 23.013 0z" />
+  </svg>
+);
+
+export const IcoSQL = ({ size = 36, color = '#4479A1', className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color} className={className} aria-hidden="true">
+    <path d="M12 3C7.03 3 3 4.79 3 7v10c0 2.21 4.03 4 9 4s9-1.79 9-4V7c0-2.21-4.03-4-9-4zm0 2c3.87 0 7 1.34 7 3s-3.13 3-7 3-7-1.34-7-3 3.13-3 7-3zm0 14c-3.87 0-7-1.34-7-3v-2.18c1.77 1.15 4.3 1.83 7 1.83s5.23-.68 7-1.83V16c0 1.66-3.13 3-7 3zm0-5c-3.87 0-7-1.34-7-3V8.82c1.77 1.15 4.3 1.83 7 1.83s5.23-.68 7-1.83V11c0 1.66-3.13 3-7 3z" />
   </svg>
 );

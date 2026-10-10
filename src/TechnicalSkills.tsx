@@ -2,9 +2,9 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import {
-  IcoHTML5, IcoCSS3, IcoBootstrap, IcoJavaScript,
-  IcoMaterialUI, IcoRedux, IcoGit, IcoGitea, IcoGitHub,
-  IcoCursor, IcoFigma, IcoJira,
+  IcoHTML5, IcoCSS3, IcoBootstrap, IcoJavaScript, IcoReact,
+  IcoMaterialUI, IcoRedux, IcoGit, IcoGitea, IcoAngular,
+  IcoGitHub, IcoCursor, IcoFigma, IcoJira, IcoSQL,
 } from './SkillIcons';
 import laptopImg from './assets/laptop-wire-desktop.png';
 import './TechnicalSkills.css';
@@ -12,18 +12,24 @@ import './TechnicalSkills.css';
 gsap.registerPlugin(Draggable);
 
 const SKILLS = [
+  // Row 1 (5 items)
   { id: 'html',       label: 'HTML 5',        Icon: IcoHTML5,      color: '#E34F26' },
   { id: 'css',        label: 'CSS 3',         Icon: IcoCSS3,       color: '#1572B6' },
   { id: 'bootstrap',  label: 'Bootstrap',     Icon: IcoBootstrap,  color: '#7952B3' },
   { id: 'javascript', label: 'JavaScript',    Icon: IcoJavaScript, color: '#F7DF1E' },
+  { id: 'react',      label: 'React',         Icon: IcoReact,      color: '#61DAFB' },
+  // Row 2 (5 items)
   { id: 'materialui', label: 'Material UI',   Icon: IcoMaterialUI, color: '#007FFF' },
   { id: 'redux',      label: 'Redux Toolkit', Icon: IcoRedux,      color: '#764ABC' },
   { id: 'git',        label: 'Git',           Icon: IcoGit,        color: '#F05032' },
   { id: 'gitea',      label: 'Gitea',         Icon: IcoGitea,      color: '#609926' },
+  { id: 'angular',    label: 'Angular',       Icon: IcoAngular,    color: '#DD0031' },
+  // Row 3 (5 items)
   { id: 'github',     label: 'GitHub',        Icon: IcoGitHub,     color: '#e2e8f0' },
   { id: 'cursor',     label: 'Cursor',        Icon: IcoCursor,     color: '#00D4FF' },
   { id: 'figma',      label: 'Figma',         Icon: IcoFigma,      color: '#F24E1E' },
   { id: 'jira',       label: 'Jira',          Icon: IcoJira,       color: '#0052CC' },
+  { id: 'sql',        label: 'SQL',           Icon: IcoSQL,        color: '#4479A1' },
 ];
 
 export const TechnicalSkills = () => {
@@ -178,7 +184,7 @@ export const TechnicalSkills = () => {
                 className="ts-icon-tile"
                 style={{ '--tile-color': skill.color } as React.CSSProperties}
               >
-                <skill.Icon size={20} color={skill.color} className="ts-icon-svg" />
+                <skill.Icon size={18} color={skill.color} className="ts-icon-svg" />
                 <span className="ts-icon-label">{skill.label}</span>
               </div>
             ))}

@@ -196,6 +196,9 @@ export function InteractiveMapHero() {
           className="map-hero-img"
         />
 
+        {/* Ambient Atmospheric Overlay for eye-comfort & high contrast */}
+        <div className="map-hero-overlay" />
+
         {/* Hotspots locked inside 16:9 aspect-ratio container */}
         {HOTSPOTS.map(spot => (
           <div

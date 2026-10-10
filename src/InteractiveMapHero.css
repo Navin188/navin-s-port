@@ -34,6 +34,21 @@
   pointer-events: none;
 }
 
+/* Ambient Atmospheric Overlay — 50% lighter, subtle glare reduction */
+.map-hero-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(5, 12, 22, 0.12) 0%, rgba(5, 12, 22, 0.32) 100%),
+    linear-gradient(180deg, rgba(5, 12, 22, 0.24) 0%, rgba(5, 12, 22, 0.05) 45%, rgba(5, 12, 22, 0.28) 100%);
+  backdrop-filter: brightness(0.93) contrast(1.02);
+  -webkit-backdrop-filter: brightness(0.93) contrast(1.02);
+  transition: all 0.4s ease;
+}
+
 /* Floating Overlay Header (Top Left Title & Subtitle) */
 .map-overlay-header {
   position: absolute;
