@@ -1,0 +1,386 @@
+/* InteractiveMapHero.css - Full Edge-to-Edge Cover Hero Map (Zero Side Strips) */
+.map-hero-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0b131e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Edge-to-Edge Container filling 100vw x 100vh */
+.map-aspect-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+/* Full Cover Image eliminating all side black bars */
+.map-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  display: block;
+  pointer-events: none;
+}
+
+/* Floating Overlay Header (Top Left Title & Subtitle) */
+.map-overlay-header {
+  position: absolute;
+  top: 2rem;
+  left: 2.5rem;
+  z-index: 40;
+  pointer-events: none;
+  max-width: 520px;
+}
+
+.map-overlay-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: clamp(2rem, 3.6vw, 3.6rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
+}
+
+.map-overlay-title span {
+  color: #10B981;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.map-overlay-subtitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  margin-top: 0.5rem;
+  line-height: 1.45;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+}
+
+/* Top Right Controls (Theme & Audio) */
+.map-controls-topright {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.map-control-btn {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 0.55rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.map-control-btn:hover {
+  background: rgba(16, 185, 129, 0.9);
+  border-color: #10B981;
+  transform: translateY(-2px);
+}
+
+/* Bottom Center 'Scroll to Fly In' Pill */
+.map-flyin-pill {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.65rem 1.5rem;
+  border-radius: 9999px;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.map-flyin-pill:hover {
+  background: #10B981;
+  border-color: #10B981;
+  transform: translateX(-50%) scale(1.06);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); }
+  50% { box-shadow: 0 8px 35px rgba(16, 185, 129, 0.6); }
+}
+
+/* Hotspot Pins & Pill Labels */
+.hotspot-wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hotspot-wrapper:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+  z-index: 45;
+}
+
+.hotspot-label-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.hotspot-label-pill.navin-pill {
+  border-color: #10B981;
+  background: rgba(16, 185, 129, 0.95);
+  color: #000000;
+}
+
+.hotspot-label-year {
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+}
+
+.hotspot-label-pill.navin-pill .hotspot-label-year {
+  background: #000000;
+  color: #10B981;
+}
+
+.hotspot-dot-container {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-dot-inner {
+  width: 12px;
+  height: 12px;
+  background: #10B981;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #10B981;
+}
+
+.hotspot-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #10B981;
+  border-radius: 50%;
+  animation: pulseRing 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Avatar Indicator for 'Navin (Me)' */
+.hotspot-avatar-container {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #10B981, #00FF66);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.8), 0 0 45px rgba(16, 185, 129, 0.4);
+  animation: avatarPulse 2s infinite ease-in-out;
+}
+
+.hotspot-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #000000;
+  display: block;
+}
+
+@keyframes avatarPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+  50% { transform: scale(1.08); box-shadow: 0 0 35px rgba(16, 185, 129, 1); }
+}
+
+/* Dark Glassmorphism Details Modal Overlay */
+.map-modal-overlay {
+  position: absolute;
+  top: 6rem;
+  left: 2.5rem;
+  z-index: 60;
+  width: 400px;
+  max-width: 90vw;
+  background: rgba(5, 5, 5, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 1.85rem;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+  color: #FFFFFF;
+  animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.map-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.map-modal-chapter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #10B981;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.map-modal-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #94A3B8;
+  transition: all 0.2s ease;
+}
+
+.map-modal-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+.map-modal-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin: 0 0 0.3rem 0;
+}
+
+.map-modal-role {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #94A3B8;
+  margin-bottom: 0.95rem;
+}
+
+.map-modal-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin-bottom: 1.35rem;
+}
+
+.map-modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.35rem;
+}
+
+.map-modal-thumb {
+  height: 75px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-modal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.map-modal-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.map-metric-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0.65rem 0.85rem;
+}
+
+.map-metric-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #10B981;
+}
+
+.map-metric-label {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-weight: 600;
+}

@@ -1,4 +1,4 @@
-import Hero from './Hero';
+import InteractiveMapHero from './InteractiveMapHero';
 import About from './About';
 import Journey from './Journey';
 import CalculatedChaos from './CalculatedChaos';
@@ -9,8 +9,8 @@ import Footer from './Footer';
 export function App() {
   return (
     <div style={{ margin: 0, padding: 0, width: '100vw', minHeight: '100vh', backgroundColor: '#050505', overflowX: 'hidden' }}>
-      {/* 1. The Hero */}
-      <Hero />
+      {/* 1. Interactive 2.5D Landscape Map Hero */}
+      <InteractiveMapHero />
 
       {/* 2. The Introduction */}
       <About />

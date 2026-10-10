@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, MapPin } from 'lucide-react';
+import { Sparkles, MapPin, Code2 } from 'lucide-react';
+import myImage from './assets/myimage.jfif';
 import './About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,6 +11,62 @@ export const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+
+  // Overlapping Draggable Cards State
+  const [cardsPos, setCardsPos] = useState({
+    card1: { x: -25, y: -20, rot: -4 },
+    card2: { x: 50, y: 40, rot: 3 }
+  });
+  const [cardZ, setCardZ] = useState({ card1: 1, card2: 2 });
+  const [hoveredCard, setHoveredCard] = useState<'card1' | 'card2' | null>(null);
+
+  const activeDragRef = useRef<{ id: 'card1' | 'card2'; startX: number; startY: number; itemX: number; itemY: number } | null>(null);
+
+  const handlePointerDown = (e: React.PointerEvent, id: 'card1' | 'card2') => {
+    e.stopPropagation();
+    e.preventDefault();
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+
+    setCardZ({
+      card1: id === 'card1' ? 10 : 1,
+      card2: id === 'card2' ? 10 : 1
+    });
+
+    activeDragRef.current = {
+      id,
+      startX: e.clientX,
+      startY: e.clientY,
+      itemX: cardsPos[id].x,
+      itemY: cardsPos[id].y
+    };
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!activeDragRef.current) return;
+    const { id, startX, startY, itemX, itemY } = activeDragRef.current;
+    const deltaX = e.clientX - startX;
+    const deltaY = e.clientY - startY;
+
+    setCardsPos(prev => ({
+      ...prev,
+      [id]: {
+        ...prev[id],
+        x: itemX + deltaX,
+        y: itemY + deltaY
+      }
+    }));
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (activeDragRef.current) {
+      try {
+        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+      } catch {
+        // pointer capture already released
+      }
+      activeDragRef.current = null;
+    }
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,7 +104,7 @@ export const About = () => {
   }, []);
 
   return (
-    <section className="about-section" ref={sectionRef} id="about">
+    <section className="about-section" ref={sectionRef} id="about-section">
       {/* Background Spotlight */}
       <div className="about-bg-spotlight" />
 
@@ -91,38 +148,85 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Right Column: Integrated Profile Card */}
-        <div className="about-right" ref={rightRef}>
-          <div className="profile-card-container">
-            {/* Card Header Bar */}
-            <div className="profile-card-header">
-              <div className="profile-status-pill">
-                <span className="status-indicator" />
-                <span>Available for Projects</span>
+        {/* Right Column: Overlapping Draggable Cards Stack */}
+        <div className="about-right" ref={rightRef} onPointerMove={handlePointerMove}>
+          <div className="cards-stack-wrapper">
+            {/* Card 1: Main Profile Card */}
+            <div
+              className="drag-profile-card"
+              style={{
+                transform: `translate3d(${cardsPos.card1.x}px, ${cardsPos.card1.y}px, 0px) rotate(${hoveredCard === 'card1' ? 0 : cardsPos.card1.rot}deg) scale(${hoveredCard === 'card1' ? 1.04 : 1})`,
+                zIndex: cardZ.card1
+              }}
+              onPointerDown={e => handlePointerDown(e, 'card1')}
+              onPointerUp={handlePointerUp}
+              onMouseEnter={() => setHoveredCard('card1')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="profile-card-header">
+                <div className="profile-status-pill">
+                  <span className="status-indicator" />
+                  <span>Available for Projects</span>
+                </div>
+                <span className="profile-role-tag">UI / FRONTEND</span>
               </div>
-              <span className="profile-role-tag">UI / FRONTEND</span>
+
+              <div className="profile-image-frame">
+                <img
+                  src={myImage}
+                  alt="Navin Patil"
+                  className="profile-image"
+                  draggable={false}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = '/myimage.jfif';
+                  }}
+                />
+              </div>
+
+              <div className="profile-card-footer">
+                <div className="profile-location">
+                  <MapPin size={14} color="var(--accent-primary)" />
+                  <span>India</span>
+                </div>
+                <span className="profile-company">Shaurya Technosoft</span>
+              </div>
             </div>
 
-            {/* Profile Image Frame */}
-            <div className="profile-image-frame">
-              <img
-                src="/myimage.jfif"
-                alt="Navin Patil"
-                className="profile-image"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="440" height="350" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23e2e8f0"/><text x="50" y="55" font-size="20" fill="%230f172a" text-anchor="middle">NAVIN PATIL</text></svg>';
-                }}
-              />
-            </div>
-
-            {/* Card Footer Bar */}
-            <div className="profile-card-footer">
-              <div className="profile-location">
-                <MapPin size={14} color="var(--accent-primary)" />
-                <span>India</span>
+            {/* Card 2: Secondary Overlapping Tech Card */}
+            <div
+              className="drag-profile-card"
+              style={{
+                transform: `translate3d(${cardsPos.card2.x}px, ${cardsPos.card2.y}px, 0px) rotate(${hoveredCard === 'card2' ? 0 : cardsPos.card2.rot}deg) scale(${hoveredCard === 'card2' ? 1.04 : 1})`,
+                zIndex: cardZ.card2
+              }}
+              onPointerDown={e => handlePointerDown(e, 'card2')}
+              onPointerUp={handlePointerUp}
+              onMouseEnter={() => setHoveredCard('card2')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="profile-card-header">
+                <div className="profile-status-pill">
+                  <Code2 size={13} color="var(--accent-primary)" />
+                  <span>UI / Code Craft</span>
+                </div>
+                <span className="profile-role-tag">REACT & GSAP</span>
               </div>
-              <span className="profile-company">Shaurya Technosoft</span>
+
+              <div className="profile-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500&auto=format&fit=crop&q=80"
+                  alt="Code & Design"
+                  className="profile-image"
+                  draggable={false}
+                />
+              </div>
+
+              <div className="profile-card-footer">
+                <div className="profile-location">
+                  <span>⚡ 4+ Years Exp</span>
+                </div>
+                <span className="profile-company">Frontend Dev</span>
+              </div>
             </div>
           </div>
         </div>
