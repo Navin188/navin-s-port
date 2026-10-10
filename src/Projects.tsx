@@ -105,10 +105,20 @@ export const Projects = () => {
 
         const getScrollAmount = () => {
           if (!trackRef.current || validCards.length < 2) return 0;
-          // Exact distance between Card 1 center and Card N center (offsetLeft is immune to CSS transforms)
+          // Exact distance between Card 1 center and Card N center in un-transformed layout space
           const firstCard = validCards[0];
           const lastCard = validCards[validCards.length - 1];
-          return Math.max(0, lastCard.offsetLeft - firstCard.offsetLeft);
+
+          const currentX = (gsap.getProperty(trackRef.current, 'x') as number) || 0;
+          gsap.set(trackRef.current, { x: 0 });
+
+          const firstCenter = firstCard.getBoundingClientRect().left + firstCard.offsetWidth / 2;
+          const lastCenter = lastCard.getBoundingClientRect().left + lastCard.offsetWidth / 2;
+          const dist = lastCenter - firstCenter;
+
+          gsap.set(trackRef.current, { x: currentX });
+
+          return Math.max(0, dist);
         };
 
         const updateFocusModifiers = () => {
@@ -148,12 +158,12 @@ export const Projects = () => {
             pin: true,
             start: 'top top',
             end: () => '+=' + getScrollAmount(),
-            scrub: 0.5,
+            scrub: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               if (progressBarRef.current) {
-                progressBarRef.current.style.width = `${self.progress * 100}%`;
+                progressBarRef.current.style.width = `${Math.min(100, Math.max(0, self.progress * 100))}%`;
               }
               updateFocusModifiers();
             },

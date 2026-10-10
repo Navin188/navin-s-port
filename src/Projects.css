@@ -1,5 +1,6 @@
 /* Projects.css - Precision Centered Horizontal Carousel (Zero Blank Space, Zero Cutoff) */
-.cinematic-projects-section {
+.cinematic-projects-section,
+.pin-spacer {
   position: relative;
   width: 100vw;
   min-height: 100vh;
@@ -7,18 +8,22 @@
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   padding-top: 3rem;
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
-  border-top: 1px solid var(--border-color);
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Header Flow ABOVE Track */
+/* Header Flow ABOVE Track — Centered across section */
 .cinematic-header-flow {
+  width: 100%;
   position: relative;
   z-index: 20;
   text-align: center;
@@ -52,13 +57,13 @@
   letter-spacing: -0.02em;
 }
 
-/* Horizontal Track: Aligns Card 1 center to 50vw viewport center at start, and Card 4 center to 50vw at end */
+/* Horizontal Track: Card 1 center = 50vw at start, Card 4 center = 50vw at end */
 .cinematic-track {
   display: flex;
   align-items: center;
   height: 68vh;
-  padding-left: calc(50vw - min(72vw, 940px) / 2 - 1.5rem);
-  padding-right: calc(50vw - min(72vw, 940px) / 2 - 1.5rem);
+  padding-left: calc(50vw - min(70vw, 860px) / 2 - 1.25rem);
+  padding-right: calc(50vw - min(70vw, 860px) / 2 - 1.25rem);
   box-sizing: content-box;
   width: max-content;
   will-change: transform;
@@ -66,11 +71,11 @@
 
 /* Handcrafted Human-Touch Project Cards */
 .focus-card {
-  width: min(72vw, 940px);
+  width: min(70vw, 860px);
   height: 60vh;
-  max-height: 510px;
+  max-height: 500px;
   flex-shrink: 0;
-  margin: 0 1.5rem;
+  margin: 0 1.25rem;
   background: var(--bg-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -92,7 +97,7 @@
 
 /* Left Column - Content */
 .focus-card-left {
-  padding: 2.25rem 2rem;
+  padding: 2rem 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -129,7 +134,7 @@
 
 .focus-card-title {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
   font-weight: 800;
   line-height: 1.2;
   color: var(--text-primary);
@@ -139,9 +144,9 @@
 
 .focus-card-desc {
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -176,11 +181,11 @@
   margin-top: 1rem;
 }
 
-/* Right Column - Handcrafted macOS Mockup Window */
+/* Right Column - Handcrafted macOS Browser Window */
 .focus-card-right {
   background: var(--bg-secondary);
   border-left: 1px solid var(--border-color);
-  padding: 1.35rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -193,7 +198,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 16px;
-  padding: 1.15rem;
+  padding: 1.1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
