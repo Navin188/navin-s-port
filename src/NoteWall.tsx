@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Plus, Move, MessageSquare } from 'lucide-react';
 import './NoteWall.css';
 
-gsap.registerPlugin(Draggable);
+gsap.registerPlugin(Draggable, ScrollTrigger);
 
 export interface StickyNoteItem {
   id: string;
@@ -83,6 +84,33 @@ export const NoteWall = () => {
 
     return () => ctx.revert();
   }, [notes]);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      const header = sectionRef.current.querySelector('.notewall-header');
+      const board = sectionRef.current.querySelector('.notewall-board');
+      if (header) {
+        gsap.fromTo(
+          header,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+          }
+        );
+      }
+      if (board) {
+        gsap.fromTo(
+          board,
+          { y: 50, opacity: 0, scale: 0.97 },
+          {
+            y: 0, opacity: 1, scale: 1, duration: 1.2, delay: 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
+          }
+        );
+      }
+    }
+  }, []);
 
   const handleAddNote = (e: React.FormEvent) => {
     e.preventDefault();

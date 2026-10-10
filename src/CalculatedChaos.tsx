@@ -1,5 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './CalculatedChaos.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ChaosItem {
   id: string;
@@ -176,8 +180,37 @@ export function CalculatedChaos() {
     }
   };
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      const header = sectionRef.current.querySelector('.chaos-header');
+      const board = sectionRef.current.querySelector('.chaos-board-container');
+      if (header) {
+        gsap.fromTo(
+          header,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+          }
+        );
+      }
+      if (board) {
+        gsap.fromTo(
+          board,
+          { y: 50, opacity: 0, scale: 0.97 },
+          {
+            y: 0, opacity: 1, scale: 1, duration: 1.2, delay: 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
+          }
+        );
+      }
+    }
+  }, []);
+
   return (
-    <section className="chaos-section" id="chaos-section">
+    <section className="chaos-section" id="chaos-section" ref={sectionRef}>
       <div className="chaos-header">
         <div className="chaos-tag">
           <span>⚡</span> OFF THE CLOCK

@@ -11,7 +11,7 @@ const SECTIONS: NavSection[] = [
   { id: 'about-section',        label: 'About' },
   { id: 'journey-section',      label: 'Journey' },
   { id: 'chaos-section',        label: 'Off The Clock' },
-  { id: 'projects-section',     label: 'Projects' },
+  { id: 'projects',             label: 'Projects' },
   { id: 'technical-skills',     label: 'Technical Stack' },
   { id: 'note-wall-section',    label: 'Note Wall' },
   { id: 'footer-section',       label: 'Footer' },

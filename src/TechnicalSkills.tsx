@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   IcoHTML5, IcoCSS3, IcoBootstrap, IcoJavaScript, IcoReact,
   IcoMaterialUI, IcoRedux, IcoGit, IcoGitea, IcoAngular,
@@ -9,7 +10,7 @@ import {
 import laptopImg from './assets/laptop-wire-desktop.png';
 import './TechnicalSkills.css';
 
-gsap.registerPlugin(Draggable);
+gsap.registerPlugin(Draggable, ScrollTrigger);
 
 const SKILLS = [
   // Row 1 (5 items)
@@ -36,11 +37,39 @@ export const TechnicalSkills = () => {
   const [isPoweredOn, setIsPoweredOn] = useState(false);
   const [booting,     setBooting]     = useState(false);
 
+  const sectionRef    = useRef<HTMLDivElement>(null);
   const screenRef     = useRef<HTMLDivElement>(null);
   const badgeRefs     = useRef<(HTMLDivElement | null)[]>([]);
   const draggablesRef = useRef<Draggable[]>([]);
   const matrixRef     = useRef<HTMLCanvasElement>(null);
   const matrixRafRef  = useRef<number>(0);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      const header = sectionRef.current.querySelector('.ts-header');
+      const laptop = sectionRef.current.querySelector('.ts-laptop-wrap');
+      if (header) {
+        gsap.fromTo(
+          header,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+          }
+        );
+      }
+      if (laptop) {
+        gsap.fromTo(
+          laptop,
+          { y: 50, opacity: 0, scale: 0.96 },
+          {
+            y: 0, opacity: 1, scale: 1, duration: 1.2, delay: 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' },
+          }
+        );
+      }
+    }
+  }, []);
 
   /* ── Matrix rain ─────────────────────────────────────────── */
   const startMatrix = useCallback(() => {
@@ -135,7 +164,7 @@ export const TechnicalSkills = () => {
   };
 
   return (
-    <section className="ts-section" id="technical-skills">
+    <section className="ts-section" id="technical-skills" ref={sectionRef}>
 
       {/* ── Section header ──────────────────────────────────── */}
       <div className="ts-header">

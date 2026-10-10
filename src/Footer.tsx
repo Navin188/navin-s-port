@@ -1,5 +1,10 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, FileText, ArrowUpRight, Sparkles } from 'lucide-react';
 import './Footer.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export interface FooterProps {
   email?: string;
@@ -12,8 +17,26 @@ export const Footer = ({
   linkedinUrl = 'https://linkedin.com/in/navinpatil',
   resumeUrl = '/Resume_Navin_Patil.pdf',
 }: FooterProps) => {
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (footerRef.current) {
+      const container = footerRef.current.querySelector('.footer-container');
+      if (container) {
+        gsap.fromTo(
+          container,
+          { y: 45, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1.1, ease: 'power3.out',
+            scrollTrigger: { trigger: footerRef.current, start: 'top 85%' },
+          }
+        );
+      }
+    }
+  }, []);
+
   return (
-    <footer className="standard-footer" id="footer-section">
+    <footer className="standard-footer" id="footer-section" ref={footerRef}>
       <div className="footer-container">
         {/* Main Section */}
         <div className="footer-main">
