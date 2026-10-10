@@ -108,7 +108,7 @@ export const Journey = () => {
   const activeStop = mapStops[activeIndex];
 
   return (
-    <section className="journey-section" ref={sectionRef} id="journey">
+    <section className="journey-section" ref={sectionRef} id="journey-section">
       {/* Header */}
       <div className="journey-header">
         <div className="journey-badge">

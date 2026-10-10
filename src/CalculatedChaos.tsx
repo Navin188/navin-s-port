@@ -177,7 +177,7 @@ export function CalculatedChaos() {
   };
 
   return (
-    <section className="chaos-section">
+    <section className="chaos-section" id="chaos-section">
       <div className="chaos-header">
         <div className="chaos-tag">
           <span>⚡</span> OFF THE CLOCK

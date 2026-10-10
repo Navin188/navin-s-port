@@ -167,7 +167,7 @@ export function InteractiveMapHero() {
   }, []);
 
   return (
-    <div ref={wrapperRef} className="map-hero-wrapper">
+    <div ref={wrapperRef} className="map-hero-wrapper" id="hero-section">
       {/* 1. Top Left Title Overlay */}
       <div className="map-overlay-header">
         <h1 className="map-overlay-title">

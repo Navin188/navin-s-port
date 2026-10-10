@@ -121,7 +121,7 @@ export const NoteWall = () => {
   };
 
   return (
-    <section className="notewall-section" ref={sectionRef} id="notewall">
+    <section className="notewall-section" ref={sectionRef} id="note-wall-section">
       {/* Top Bar */}
       <div className="notewall-header">
         <div className="notewall-title-box">

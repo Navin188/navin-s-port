@@ -1,6 +1,5 @@
 /* Projects.css - Precision Centered Horizontal Carousel (Zero Blank Space, Zero Cutoff) */
-.cinematic-projects-section,
-.pin-spacer {
+.cinematic-projects-section {
   position: relative;
   width: 100vw;
   min-height: 100vh;

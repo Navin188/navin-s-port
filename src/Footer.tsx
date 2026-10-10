@@ -13,7 +13,7 @@ export const Footer = ({
   resumeUrl = '/Resume_Navin_Patil.pdf',
 }: FooterProps) => {
   return (
-    <footer className="standard-footer">
+    <footer className="standard-footer" id="footer-section">
       <div className="footer-container">
         {/* Main Section */}
         <div className="footer-main">
