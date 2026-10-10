@@ -12,12 +12,12 @@ export const About = () => {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
 
-  // Overlapping Draggable Cards State
+  // Overlapping Draggable Cards State (Navin's photo card ON TOP, card2 shifted right for clear double-card visibility)
   const [cardsPos, setCardsPos] = useState({
-    card1: { x: -25, y: -20, rot: -4 },
-    card2: { x: 50, y: 40, rot: 3 }
+    card1: { x: -60, y: -20, rot: -3 },
+    card2: { x: 80, y: 50, rot: 4 }
   });
-  const [cardZ, setCardZ] = useState({ card1: 1, card2: 2 });
+  const [cardZ, setCardZ] = useState({ card1: 5, card2: 2 });
   const [hoveredCard, setHoveredCard] = useState<'card1' | 'card2' | null>(null);
 
   const activeDragRef = useRef<{ id: 'card1' | 'card2'; startX: number; startY: number; itemX: number; itemY: number } | null>(null);

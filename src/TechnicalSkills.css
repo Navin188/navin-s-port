@@ -1,0 +1,401 @@
+/* TechnicalSkills.css — Compact boot-sequence section */
+
+.ts-section {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2.5rem 1.5rem 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: var(--font-family);
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+.ts-header {
+  text-align: center;
+  margin-bottom: 0.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ts-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 0.28rem 0.8rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+.ts-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ts-title-accent {
+  background: linear-gradient(130deg, var(--accent-primary) 0%, #00D4FF 55%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  position: relative;
+}
+
+/* Subtitle hint */
+.ts-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 0.4rem;
+  margin-bottom: 1.2rem;
+  animation: ts-hint-pulse 2.2s ease-in-out infinite;
+}
+
+.ts-hint-icon {
+  font-size: 0.9rem;
+  animation: ts-hint-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes ts-hint-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes ts-hint-pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.ts-hint--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* Laptop wrapper */
+.ts-laptop-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  margin: -2% auto -4% auto;
+  user-select: none;
+}
+
+.ts-laptop-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ─── Screen overlay ─────────────────────────────────────────────
+   Exact MacBook bezel alignment for laptop-wire-desktop.png:
+   Top: 11.8% (starts right beneath camera bezel)
+   Left: 11.8% (left bezel border)
+   Width: 76.4% (fits inside side bezels)
+   Height: 46.2% (ends right above the keyboard hinge at 58.0%)
+   ─────────────────────────────────────────────────────────────── */
+.ts-screen {
+  position: absolute;
+  top: 19.2%;
+  left: 15.8%;
+  width: 68.4%;
+  height: 44.2%;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+  transition: background 0.6s ease, box-shadow 0.5s ease;
+}
+
+.ts-screen--off {
+  background: #050505;
+}
+
+.ts-screen--on {
+  background: #08111e;
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(0, 255, 102, 0.12);
+}
+
+/* Matrix canvas */
+.ts-matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* OFF overlay */
+.ts-off-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ts-off-blink {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.85);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
+  animation: ts-blink 1.8s ease-in-out infinite;
+}
+
+@keyframes ts-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.ts-off-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+}
+
+/* Boot flash */
+.ts-boot-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 102, 0.1);
+  z-index: 3;
+  pointer-events: none;
+  animation: ts-flash 0.5s ease forwards;
+}
+
+@keyframes ts-flash {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Icons grid inside screen — Balanced 4x3 Grid, Spaced Evenly with Zero Overlap */
+.ts-icons-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 6px;
+  column-gap: 8px;
+  padding: 8px 12px;
+  align-content: space-evenly;
+  justify-items: center;
+  pointer-events: none;
+}
+
+/* Single icon tile */
+.ts-icon-tile {
+  width: 100%;
+  max-width: 86px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 4px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: grab;
+  opacity: 0;
+  pointer-events: auto;
+  will-change: transform;
+  user-select: none;
+  position: relative;
+  z-index: 5;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    0 0 10px color-mix(in srgb, var(--tile-color, #fff) 20%, transparent);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ts-icon-tile:hover {
+  border-color: color-mix(in srgb, var(--tile-color, #fff) 50%, transparent);
+  box-shadow:
+    0 5px 16px rgba(0, 0, 0, 0.55),
+    0 0 18px color-mix(in srgb, var(--tile-color, #fff) 35%, transparent);
+}
+
+.ts-icon-tile:active {
+  cursor: grabbing;
+}
+
+.ts-icon-svg {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--tile-color, #fff) 45%, transparent));
+}
+
+.ts-icon-label {
+  font-family: var(--font-family);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Touchpad boot button */
+.ts-touchpad-btn {
+  position: absolute;
+  top: 79.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  outline: none;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    0 4px 18px rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ts-touchpad-btn--on {
+  background: rgba(0, 255, 102, 0.15);
+  box-shadow:
+    0 0 0 2px rgba(0, 255, 102, 0.6),
+    0 0 24px rgba(0, 255, 102, 0.45),
+    0 4px 18px rgba(0, 0, 0, 0.5);
+  color: var(--accent-primary);
+}
+
+.ts-touchpad-btn:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.ts-touchpad-btn:active:not(:disabled) {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.ts-touchpad-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ts-touchpad-btn--on::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 102, 0.35);
+  animation: ts-ring-pulse 2s ease-out infinite;
+}
+
+@keyframes ts-ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ts-section {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .ts-title {
+    font-size: 1.8rem;
+  }
+
+  .ts-icon-tile {
+    padding: 5px 7px;
+    border-radius: 8px;
+    gap: 2px;
+  }
+
+  .ts-icons-grid {
+    gap: 4px;
+    padding: 6px 8px;
+  }
+
+  .ts-touchpad-btn {
+    width: 38px;
+    height: 38px;
+  }
+}

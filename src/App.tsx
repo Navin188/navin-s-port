@@ -3,6 +3,7 @@ import About from './About';
 import Journey from './Journey';
 import CalculatedChaos from './CalculatedChaos';
 import Projects from './Projects';
+import TechnicalSkills from './TechnicalSkills';
 import NoteWall from './NoteWall';
 import Footer from './Footer';
 
@@ -23,6 +24,9 @@ export function App() {
 
       {/* 5. Cinematic Projects (Focus Carousel) */}
       <Projects />
+
+      {/* 6. Technical Skills — Boot Sequence */}
+      <TechnicalSkills />
 
       {/* 6. Interactive Note Wall */}
       <NoteWall />
