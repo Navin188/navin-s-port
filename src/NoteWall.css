@@ -1,0 +1,211 @@
+/* NoteWall.css - 40% Decreased Title Size, Inter Font, Simple Title, & Light Theme */
+.notewall-section {
+  position: relative;
+  width: 100vw;
+  min-height: 85vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 3rem; /* Reduced unwanted vertical spacing */
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.notewall-header {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.notewall-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.notewall-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  color: var(--accent-primary);
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+/* Simple Title with 40% Decreased Font Size */
+.notewall-heading {
+  font-family: 'Inter', sans-serif !important;
+  font-size: clamp(1.5rem, 2.4vw, 2.4rem); /* 40% smaller title size */
+  font-weight: 800;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.notewall-count-badge {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  background: var(--accent-glow);
+  border: 1px solid var(--accent-primary);
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+}
+
+/* Form Container */
+.notewall-form {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 0.35rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-card);
+}
+
+.notewall-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.45rem 0.75rem;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.notewall-input::placeholder {
+  color: var(--text-muted);
+}
+
+.notewall-submit-btn {
+  background: var(--accent-primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1.1rem;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notewall-submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Stickyboard Workspace */
+.stickyboard-workspace {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  height: 520px;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-card);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.stickyboard-bg-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Draggable Sticky Note Cards */
+.note-card {
+  position: absolute;
+  width: 230px;
+  padding: 1.1rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  will-change: transform;
+  color: #0F172A;
+  font-family: 'Inter', sans-serif !important;
+  transition: box-shadow 0.2s ease;
+}
+
+.note-card-yellow { background: #FEF08A; border: 1px solid rgba(254, 240, 138, 0.8); }
+.note-card-pink { background: #FECACA; border: 1px solid rgba(254, 202, 202, 0.8); }
+.note-card-blue { background: #BFDBFE; border: 1px solid rgba(191, 219, 254, 0.8); }
+.note-card-purple { background: #C7D2FE; border: 1px solid rgba(199, 210, 254, 0.8); }
+
+.note-card:active {
+  cursor: grabbing;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  z-index: 100 !important;
+}
+
+.note-card-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0F172A;
+  margin-bottom: 0.5rem;
+  background: rgba(15, 23, 42, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+.note-card-text {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0F172A;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .notewall-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stickyboard-workspace {
+    height: 440px;
+  }
+}

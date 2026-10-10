@@ -1,0 +1,253 @@
+/* About.css - 40% Decreased Title Size, Inter Font, Simple Title, & Light Theme */
+.about-section {
+  position: relative;
+  width: 100vw;
+  min-height: 85vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 4rem; /* Reduced unwanted vertical spacing */
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.about-bg-spotlight {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 500px;
+  background: 
+    radial-gradient(circle at 30% 40%, var(--accent-glow) 0%, transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(37, 99, 235, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+.about-split-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  gap: 3.5rem;
+  z-index: 2;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.about-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  color: var(--accent-primary);
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+/* Simple Title with 40% Decreased Font Size */
+.about-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: clamp(1.6rem, 2.8vw, 2.8rem); /* 40% smaller title font size */
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.about-title span {
+  color: var(--accent-primary);
+}
+
+/* Glass Bio Panel */
+.about-bio-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+  padding: 1.5rem;
+  border-left: 3px solid var(--accent-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.about-subtext {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-subtext strong {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.about-subtext .company-link {
+  color: var(--text-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Stats Row */
+.about-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.85rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+}
+
+.stat-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Profile Card Container */
+.profile-card-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  padding: 0.85rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  overflow: hidden;
+}
+
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.4rem;
+}
+
+.profile-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: var(--accent-glow);
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--accent-primary);
+}
+
+.status-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.profile-role-tag {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.profile-image-frame {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-input);
+  border-radius: 10px;
+}
+
+.profile-location {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.profile-company {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+@media (max-width: 1024px) {
+  .about-section {
+    padding: 3rem 1.5rem;
+  }
+  .about-split-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

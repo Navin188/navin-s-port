@@ -1,3 +1,52 @@
+/* index.css - Light Theme Default Design Tokens with Inter Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  /* Typography - Inter Everywhere */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Default Theme: LIGHT THEME */
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-input: #F1F5F9;
+  
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-card: rgba(0, 0, 0, 0.1);
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+
+  --accent-primary: #10B981;  /* High contrast emerald green */
+  --accent-glow: rgba(16, 185, 129, 0.2);
+  --accent-blue: #2563EB;
+  --accent-gold: #D97706;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-primary: #050505;
+  --bg-secondary: #0D0D0D;
+  --bg-card: rgba(20, 20, 20, 0.85);
+  --bg-input: rgba(255, 255, 255, 0.05);
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.12);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: rgba(255, 255, 255, 0.45);
+
+  --accent-primary: #00FF66;  /* Neon green */
+  --accent-glow: rgba(0, 255, 102, 0.25);
+  --accent-blue: #38BDF8;
+  --accent-gold: #FACC15;
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,7 +57,10 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   overflow-x: hidden;
-  background-color: #050505;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body, #root {
@@ -16,5 +68,17 @@ body, #root {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #050505;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Force Inter Everywhere */
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea {
+  font-family: var(--font-family) !important;
+}
+
+code, kbd, .mono-text {
+  font-family: var(--font-mono) !important;
 }

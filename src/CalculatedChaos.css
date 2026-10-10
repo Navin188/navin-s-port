@@ -1,0 +1,308 @@
+/* CalculatedChaos.css - Corkboard / Pinboard Section with Draggable Polaroids */
+.chaos-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.chaos-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+.chaos-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  color: var(--accent-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.chaos-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: clamp(1.8rem, 3.2vw, 3.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.03em;
+}
+
+.chaos-title span {
+  background: linear-gradient(135deg, #FF7E5F, #FEB47B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.chaos-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Corkboard Canvas Container */
+.chaos-board-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 680px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-card);
+  border-radius: 28px;
+  box-shadow: var(--shadow-card), inset 0 0 40px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 1024px) {
+  .chaos-board-container {
+    height: 900px;
+  }
+}
+
+/* Pinboard texture overlay */
+.chaos-board-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: radial-gradient(var(--text-primary) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+/* Draggable Items Base */
+.drag-card {
+  position: absolute;
+  cursor: grab;
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.drag-card:active {
+  cursor: grabbing !important;
+}
+
+.drag-card:hover {
+  z-index: 99 !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Push Pin */
+.push-pin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.push-pin::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.push-pin.red { background: #EF4444; }
+.push-pin.blue { background: #3B82F6; }
+.push-pin.green { background: #10B981; }
+.push-pin.yellow { background: #F59E0B; }
+.push-pin.purple { background: #8B5CF6; }
+
+/* Polaroid Style Card */
+.polaroid-card {
+  background: #FFFFFF;
+  padding: 12px 12px 18px 12px;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.polaroid-img-box {
+  width: 100%;
+  height: 140px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #F1F5F9;
+}
+
+.polaroid-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+  margin-top: 10px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* Lined Note Paper Card */
+.note-paper-card {
+  background: #FAF8F5;
+  background-image: repeating-linear-gradient(#FAF8F5, #FAF8F5 23px, #E2E8F0 24px);
+  padding: 20px 24px;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 290px;
+  color: #1E293B;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.note-paper-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #EF4444;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.note-paper-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0F172A;
+  margin-bottom: 12px;
+}
+
+.note-paper-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.note-paper-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.note-paper-list li {
+  margin-bottom: 2px;
+}
+
+/* Music Widget Card */
+.music-widget-card {
+  background: linear-gradient(135deg, #FF416C, #FF4B2B);
+  color: #FFFFFF;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(255, 65, 108, 0.3);
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.music-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.music-disc {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #111 20%, #333 21%, #222 50%, #111 51%);
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  animation: spinDisc 8s linear infinite;
+}
+
+@keyframes spinDisc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.music-info {
+  text-align: center;
+}
+
+.music-track {
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.music-artist {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+/* Sticky Post-it Note */
+.postit-note {
+  background: #E0E7FF;
+  color: #3730A3;
+  padding: 18px;
+  border-radius: 2px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  width: 170px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.tape-strip {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
