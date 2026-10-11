@@ -6,6 +6,8 @@ import { Plus, Move, User } from 'lucide-react';
 import {
   fetchStickyNotesFromDB,
   createStickyNoteInDB,
+  getCachedStickyNotes,
+  type StickyNoteRecord,
 } from './services/supabaseService';
 import './NoteWall.css';
 
@@ -47,43 +49,50 @@ const getSlotCoordinates = (index: number) => {
   };
 };
 
+const formatDBNotes = (items: StickyNoteRecord[]): StickyNoteItem[] => {
+  return items.map((item, i) => {
+    const coords = getSlotCoordinates(i);
+    let authorName = 'Anonymous';
+    if (item.author_name && item.author_name.trim() && item.author_name.trim().toLowerCase() !== 'visitor') {
+      authorName = item.author_name.trim();
+    } else if (item.badge && item.badge.trim() && item.badge.trim().toUpperCase() !== 'COMMUNITY NOTE') {
+      authorName = item.badge.trim();
+    }
+
+    return {
+      id: item.id || `db-note-${i}`,
+      badge: authorName,
+      text: item.message,
+      top: coords.top,
+      left: coords.left,
+      rotate: coords.rotate,
+      colorClass: item.color_class || colorPaletteClasses[i % colorPaletteClasses.length],
+    };
+  });
+};
+
 export const NoteWall = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const boardRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const [notes, setNotes] = useState<StickyNoteItem[]>([]);
+  // Instantly hydrate from local storage cache so page refresh NEVER loses notes
+  const [notes, setNotes] = useState<StickyNoteItem[]>(() => {
+    const cached = getCachedStickyNotes();
+    return cached.length > 0 ? formatDBNotes(cached) : [];
+  });
+
   const [inputAuthor, setInputAuthor] = useState('');
   const [inputText, setInputText] = useState('');
   const [submittingNote, setSubmittingNote] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Load Sticky Notes from Supabase
+  // Load & Sync Sticky Notes from Supabase
   useEffect(() => {
     const loadDBNotes = async () => {
       const { data, error } = await fetchStickyNotesFromDB();
       if (!error && data && data.length > 0) {
-        const formatted: StickyNoteItem[] = data.map((item, i) => {
-          const coords = getSlotCoordinates(i);
-          // Show the person's real name on the note badge instead of "COMMUNITY NOTE"
-          let authorName = 'Anonymous';
-          if (item.author_name && item.author_name.trim() && item.author_name.trim().toLowerCase() !== 'visitor') {
-            authorName = item.author_name.trim();
-          } else if (item.badge && item.badge.trim() && item.badge.trim().toUpperCase() !== 'COMMUNITY NOTE') {
-            authorName = item.badge.trim();
-          }
-
-          return {
-            id: item.id || `db-note-${i}`,
-            badge: authorName,
-            text: item.message,
-            top: coords.top,
-            left: coords.left,
-            rotate: coords.rotate,
-            colorClass: item.color_class || colorPaletteClasses[i % colorPaletteClasses.length],
-          };
-        });
-        setNotes(formatted);
+        setNotes(formatDBNotes(data));
       }
     };
     loadDBNotes();

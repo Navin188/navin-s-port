@@ -14,9 +14,30 @@ export interface StickyNoteRecord {
   created_at?: string;
 }
 
+const LOCAL_STORAGE_KEY = 'portfolio_sticky_notes_cache';
+
+export const getCachedStickyNotes = (): StickyNoteRecord[] => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+};
+
+export const setCachedStickyNotes = (notes: StickyNoteRecord[]) => {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
+  } catch {}
+};
+
 export const fetchStickyNotesFromDB = async (): Promise<{ data: StickyNoteRecord[]; error: string | null }> => {
+  const cached = getCachedStickyNotes();
+
   if (!isSupabaseConfigured) {
-    return { data: [], error: 'Supabase credentials not configured' };
+    return { data: cached, error: null };
   }
 
   try {
@@ -28,13 +49,23 @@ export const fetchStickyNotesFromDB = async (): Promise<{ data: StickyNoteRecord
 
     if (error) {
       console.warn('[Supabase] Error fetching sticky notes:', error.message);
-      return { data: [], error: error.message };
+      return { data: cached, error: error.message };
     }
 
-    return { data: data || [], error: null };
+    if (data && data.length > 0) {
+      // Merge server notes with any pending local notes
+      const localOnly = cached.filter(
+        (cn) => cn.id?.startsWith('local-') && !data.some((sn) => sn.message === cn.message)
+      );
+      const merged = [...data, ...localOnly];
+      setCachedStickyNotes(merged);
+      return { data: merged, error: null };
+    }
+
+    return { data: cached.length > 0 ? cached : data || [], error: null };
   } catch (err: any) {
     console.warn('[Supabase] Fetch exception:', err);
-    return { data: [], error: err.message || 'Network error' };
+    return { data: cached, error: err.message || 'Network error' };
   }
 };
 
@@ -50,24 +81,28 @@ export const createStickyNoteInDB = async (
     return { data: null, error: 'Note message exceeds 280 character limit.' };
   }
 
+  const fallbackName = (note.author_name || 'Anonymous').trim().substring(0, 50);
+  const localNote: StickyNoteRecord = {
+    id: `local-${Date.now()}`,
+    message: trimmedMsg,
+    author_name: fallbackName,
+    badge: (note.badge || fallbackName).trim().substring(0, 50),
+    color_class: note.color_class || 'note-card-yellow',
+    top: note.top || '100px',
+    left: note.left || '100px',
+    rotate: typeof note.rotate === 'number' ? note.rotate : 0,
+    created_at: new Date().toISOString(),
+  };
+
+  // 1. Immediately cache locally so page refresh NEVER loses it
+  const currentCache = getCachedStickyNotes();
+  setCachedStickyNotes([localNote, ...currentCache]);
+
   if (!isSupabaseConfigured) {
-    // Return formatted item for offline/local state fallback
-    const localNote: StickyNoteRecord = {
-      id: `local-${Date.now()}`,
-      message: trimmedMsg,
-      author_name: note.author_name || 'Anonymous',
-      badge: note.badge || note.author_name || 'Anonymous',
-      color_class: note.color_class || 'note-card-yellow',
-      top: note.top || '100px',
-      left: note.left || '100px',
-      rotate: note.rotate || 0,
-      created_at: new Date().toISOString(),
-    };
     return { data: localNote, error: null };
   }
 
   try {
-    const fallbackName = (note.author_name || 'Anonymous').trim().substring(0, 50);
     const payload = {
       message: trimmedMsg,
       author_name: fallbackName,
@@ -85,14 +120,18 @@ export const createStickyNoteInDB = async (
       .single();
 
     if (error) {
-      console.error('[Supabase] Insert sticky note error:', error);
-      return { data: null, error: error.message };
+      console.warn('[Supabase] Insert sticky note error, saved in local cache:', error);
+      return { data: localNote, error: null };
     }
+
+    // Replace the temporary local id in cache with the real database record
+    const updated = getCachedStickyNotes().map((n) => (n.id === localNote.id ? data : n));
+    setCachedStickyNotes(updated);
 
     return { data, error: null };
   } catch (err: any) {
-    console.error('[Supabase] Insert exception:', err);
-    return { data: null, error: err.message || 'Database insert failed' };
+    console.warn('[Supabase] Insert exception, saved in local cache:', err);
+    return { data: localNote, error: null };
   }
 };
 
