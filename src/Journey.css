@@ -264,6 +264,25 @@
   font-weight: 700;
   color: var(--text-secondary);
   white-space: nowrap;
+  pointer-events: none;
+}
+
+.map-pin-marker.pin-align-center .pin-label-pill {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+.map-pin-marker.pin-align-right .pin-label-pill {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.map-pin-marker.pin-align-left .pin-label-pill {
+  left: 0;
+  right: auto;
+  transform: none;
 }
 
 /* ACTIVE PIN HIGH CONTRAST STATE */

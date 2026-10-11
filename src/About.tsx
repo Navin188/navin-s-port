@@ -113,7 +113,7 @@ export const About = () => {
         {/* Left Column: Simple Title & Bio */}
         <div className="about-left" ref={leftRef}>
           <h2 className="about-title">
-            Welcome to <span>Navin's World</span>
+            Hi  it's Your buddy <span> Navin</span>
           </h2>
 
           {/* Glass Bio Panel */}
@@ -132,13 +132,13 @@ export const About = () => {
             </div>
 
             <div className="stat-card">
-              <span className="stat-value">50+</span>
+              <span className="stat-value">20+</span>
               <span className="stat-title">UI Modules</span>
             </div>
 
             <div className="stat-card">
               <span className="stat-value">100%</span>
-              <span className="stat-title">API-Driven</span>
+              <span className="stat-title">Responsive</span>
             </div>
           </div>
         </div>
@@ -204,7 +204,7 @@ export const About = () => {
                   <Code2 size={13} color="var(--accent-primary)" />
                   <span>UI / Code Craft</span>
                 </div>
-                <span className="profile-role-tag">REACT & GSAP</span>
+                <span className="profile-role-tag">REACT & Anguler</span>
               </div>
 
               <div className="profile-image-frame">
@@ -218,7 +218,7 @@ export const About = () => {
 
               <div className="profile-card-footer">
                 <div className="profile-location">
-                  <span>⚡ 4+ Years Exp</span>
+                  <span>4+ Years Exp</span>
                 </div>
                 <span className="profile-company">Frontend Dev</span>
               </div>

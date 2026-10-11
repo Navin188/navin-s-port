@@ -24,58 +24,58 @@ const mapStops: MapStopItem[] = [
   {
     id: 'stop-1',
     stepCount: '01 / 04',
-    year: '2016 – 2020',
+    year: '2022 – 2025',
     pinLabel: 'Academic',
-    companyName: 'Computer Engineering',
-    heading: 'College Journey: Diploma & B.Tech in Computer Engineering',
+    companyName: 'Electronics & Telecommunication',
+    heading: 'B.Tech in Electronics & Telecommunication',
     description:
-      'Mastered core computer science principles, data structures, algorithm design, and software architecture fundamentals. Developed a deep passion for web performance and responsive interfaces.',
+      'Graduated with a degree in Electronics and Telecommunication Engineering. Built a strong foundation in Electronics and Telecommunication at Bharatratna Indira Gandhi College of Engineering.',
     xPercent: 18,
     yPercent: 70,
     icon: <GraduationCap size={18} />,
-    tags: ['Computer Engineering', 'Data Structures', 'Web Architecture', 'B.Tech'],
+    tags: ['Electronics & Telecommunication'],
   },
   {
     id: 'stop-2',
     stepCount: '02 / 04',
-    year: '2020 – 2021',
+    year: '2021 – 2022',
     pinLabel: 'UI Design',
-    companyName: 'Figma & Design Tokens',
+    companyName: 'Figma & Web Design at Vertex Technosys',
     heading: 'The Beginning: UI Designer (Wireframes & Pixel Perfection)',
     description:
-      'Crafted high-fidelity Figma wireframes, design tokens, and interactive component libraries. Focused heavily on visual hierarchy, typography precision, and user conversion psychology.',
+      'Crafted high-fidelity Figma wireframes, design tokens, and interactive component libraries. Focused heavily on visual hierarchy, typographic precision, and user conversion psychology.',
     xPercent: 38,
     yPercent: 28,
     icon: <Palette size={18} />,
-    tags: ['Figma', 'Wireframing', 'Design Tokens', 'Pixel Perfection'],
+    tags: ['Figma', 'Wireframing', 'Web Design', 'Pixel Perfection'],
   },
   {
     id: 'stop-3',
     stepCount: '03 / 04',
-    year: '2021 – PRESENT',
-    pinLabel: 'Shaurya Technosoft',
+    year: '2022 – 2024',
+    pinLabel: 'Shaurya Technosoft Pvt Ltd as a UI Designer',
     companyName: 'Shaurya Technosoft',
-    heading: 'The Shift: Frontend Developer @ Shaurya Technosoft (4+ Years)',
+    heading: 'UI Designer at Shaurya Technosoft (2 Years)',
     description:
-      'Engineered enterprise React applications, dynamic state architectures, REST API integrations, and high-performance UI components for global clients. Shipped 50+ production modules.',
+      'My responsibilities during this period included creating wireframes and converting them into pixel-perfect designs for various screen sizes. I designed over 20 web applications and websites during this time.',
     xPercent: 62,
     yPercent: 72,
     icon: <Code2 size={18} />,
-    tags: ['React', 'TypeScript', 'REST APIs', 'Redux Toolkit', 'GSAP'],
+    tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Tailwind CSS', 'Angular'],
   },
   {
     id: 'stop-4',
     stepCount: '04 / 04',
-    year: '2024',
-    pinLabel: 'Rentloop',
-    companyName: 'PropTech Hackathon',
-    heading: 'The Hackathon: 2nd Place Winner (Rentloop)',
+    year: '2026 - present',
+    pinLabel: 'Frontend Developer',
+    companyName: 'Shaurya Technosoft',
+    heading: 'Frontend Developer at Shaurya Technosoft',
     description:
-      'Designed and shipped Rentloop — a full-stack digital property rental ecosystem — securing 2nd Place Winner out of 100+ competing developer teams with instant escrow settlements.',
+      'Throughout this journey, I have learned a lot and transformed my workflow. Previously, I focused on converting wireframes into web pages and screens. Now, bringing those designs to life by making them dynamic and interactive has sparked even greater interest in my work. I genuinely enjoy my work and responsibilities.',
     xPercent: 84,
     yPercent: 26,
     icon: <Award size={18} />,
-    tags: ['Stripe API', 'Escrow System', 'React', 'Award Winner'],
+    tags: ['React', 'Redux Toolkit', 'UI Design', 'Figma'],
   },
 ];
 
@@ -181,20 +181,29 @@ export const Journey = () => {
             />
 
             {/* 4 Map Pin Markers */}
-            {mapStops.map((stop, index) => (
-              <div
-                key={stop.id}
-                className={`map-pin-marker ${index === activeIndex ? 'is-active' : ''}`}
-                style={{
-                  left: `${stop.xPercent}%`,
-                  top: `${stop.yPercent}%`,
-                }}
-                onClick={() => setActiveIndex(index)}
-              >
-                <div className="pin-bubble">{stop.icon}</div>
-                <div className="pin-label-pill">{stop.pinLabel}</div>
-              </div>
-            ))}
+            {mapStops.map((stop, index) => {
+              const alignClass =
+                stop.xPercent > 70
+                  ? 'pin-align-right'
+                  : stop.xPercent < 25
+                    ? 'pin-align-left'
+                    : 'pin-align-center';
+
+              return (
+                <div
+                  key={stop.id}
+                  className={`map-pin-marker ${alignClass} ${index === activeIndex ? 'is-active' : ''}`}
+                  style={{
+                    left: `${stop.xPercent}%`,
+                    top: `${stop.yPercent}%`,
+                  }}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <div className="pin-bubble">{stop.icon}</div>
+                  <div className="pin-label-pill">{stop.pinLabel}</div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Stepper Bar Underneath Map */}
