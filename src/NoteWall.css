@@ -9,11 +9,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3.5rem 3rem; /* Reduced unwanted vertical spacing */
+  padding: 5rem 3rem;
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
-  border-top: 1px solid var(--border-color);
+  border-top: none !important;
+  border-bottom: none !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -54,7 +55,8 @@
 /* Simple Title with 40% Decreased Font Size */
 .notewall-heading {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(1.5rem, 2.4vw, 2.4rem); /* 40% smaller title size */
+  font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+  /* 40% smaller title size */
   font-weight: 800;
   margin: 0;
   color: var(--text-primary);
@@ -173,10 +175,25 @@
   transition: box-shadow 0.2s ease;
 }
 
-.note-card-yellow { background: #FEF08A; border: 1px solid rgba(254, 240, 138, 0.8); }
-.note-card-pink { background: #FECACA; border: 1px solid rgba(254, 202, 202, 0.8); }
-.note-card-blue { background: #BFDBFE; border: 1px solid rgba(191, 219, 254, 0.8); }
-.note-card-purple { background: #C7D2FE; border: 1px solid rgba(199, 210, 254, 0.8); }
+.note-card-yellow {
+  background: #FEF08A;
+  border: 1px solid rgba(254, 240, 138, 0.8);
+}
+
+.note-card-pink {
+  background: #FECACA;
+  border: 1px solid rgba(254, 202, 202, 0.8);
+}
+
+.note-card-blue {
+  background: #BFDBFE;
+  border: 1px solid rgba(191, 219, 254, 0.8);
+}
+
+.note-card-purple {
+  background: #C7D2FE;
+  border: 1px solid rgba(199, 210, 254, 0.8);
+}
 
 .note-card:active {
   cursor: grabbing;
@@ -220,6 +237,7 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
   .stickyboard-workspace {
     height: 440px;
   }

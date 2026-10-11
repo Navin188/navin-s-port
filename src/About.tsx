@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, MapPin, Code2 } from 'lucide-react';
+import { MapPin, Code2 } from 'lucide-react';
 import myImage from './assets/myimage.jfif';
 import './About.css';
 
@@ -112,11 +112,6 @@ export const About = () => {
       <div className="about-split-container">
         {/* Left Column: Simple Title & Bio */}
         <div className="about-left" ref={leftRef}>
-          <div className="about-tag">
-            <Sparkles size={14} color="var(--accent-primary)" />
-            <span>Introduction</span>
-          </div>
-
           <h2 className="about-title">
             Welcome to <span>Navin's World</span>
           </h2>

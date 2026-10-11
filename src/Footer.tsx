@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail, FileText, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Mail, FileText, ArrowUpRight } from 'lucide-react';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,10 +41,6 @@ export const Footer = ({
         {/* Main Section */}
         <div className="footer-main">
           <div className="footer-title-box">
-            <div className="footer-connect-tag">
-              <Sparkles size={14} color="var(--accent-primary)" />
-              <span>Get In Touch</span>
-            </div>
             <h2 className="footer-large-title">
               Let's <span>Connect.</span>
             </h2>

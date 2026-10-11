@@ -168,7 +168,6 @@ export const TechnicalSkills = () => {
 
       {/* ── Section header ──────────────────────────────────── */}
       <div className="ts-header">
-        <span className="ts-eyebrow">SKILLS</span>
         <h2 className="ts-title">
           Powering the&nbsp;<span className="ts-title-accent">Frontend</span>
         </h2>

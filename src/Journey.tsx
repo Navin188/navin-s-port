@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Compass, GraduationCap, Palette, Code2, Award } from 'lucide-react';
+import { GraduationCap, Palette, Code2, Award } from 'lucide-react';
 import './Journey.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -111,11 +111,6 @@ export const Journey = () => {
     <section className="journey-section" ref={sectionRef} id="journey-section">
       {/* Header */}
       <div className="journey-header">
-        <div className="journey-badge">
-          <Compass size={14} color="var(--accent-primary)" />
-          <span>Journey</span>
-        </div>
-
         <h2 className="journey-title">
           <span>Journey</span>
         </h2>

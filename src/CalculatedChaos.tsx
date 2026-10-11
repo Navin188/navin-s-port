@@ -1,6 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import alwaysInloopImg from './assets/calculated-chas/always-inloop.jpeg';
+import alwaysProtectorImg from './assets/calculated-chas/always-protector.jpeg';
+import fevFoodImg from './assets/calculated-chas/fev-food.jpeg';
+import fevPlaceEverImg from './assets/calculated-chas/fev-place-ever.jpeg';
+import giftSillhaveImg from './assets/calculated-chas/giftSillhave.jpeg';
+import meWithMyselfImg from './assets/calculated-chas/me-with-myself.jpeg';
+import myLoveImg from './assets/calculated-chas/myLOve.jpeg';
+import theSetupImg from './assets/calculated-chas/the-setup-i-love-towork.jpeg';
 import './CalculatedChaos.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,22 +30,13 @@ interface ChaosItem {
 }
 
 const INITIAL_ITEMS: ChaosItem[] = [
+  // 1. Off the clock note (kept)
   {
-    id: 'item-1',
-    type: 'polaroid',
-    x: 40,
-    y: 50,
-    rotation: -5,
-    pinColor: 'red',
-    imgUrl: '/myimage.jfif',
-    caption: 'me, probably mid-laugh'
-  },
-  {
-    id: 'item-2',
+    id: 'item-offtheclock',
     type: 'note',
-    x: 250,
+    x: 430,
     y: 35,
-    rotation: 2,
+    rotation: 1.5,
     pinColor: 'blue',
     badge: 'OFF THE CLOCK',
     title: "Hi, I'm Navin. Not the work version.",
@@ -51,73 +50,97 @@ const INITIAL_ITEMS: ChaosItem[] = [
       "• Asking 'what if?' about everything"
     ]
   },
+  // 2. I stop for cars (kept)
   {
-    id: 'item-3',
-    type: 'polaroid',
-    x: 580,
-    y: 45,
-    rotation: -4,
-    pinColor: 'red',
-    imgUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=80',
-    caption: 'Coldplay. Best night ever.'
-  },
-  {
-    id: 'item-4',
-    type: 'polaroid',
-    x: 790,
-    y: 40,
-    rotation: 5,
-    pinColor: 'purple',
-    imgUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80',
-    caption: 'first gift from my friends'
-  },
-  {
-    id: 'item-5',
+    id: 'item-cars',
     type: 'polaroid',
     x: 50,
-    y: 370,
+    y: 380,
     rotation: 4,
     pinColor: 'yellow',
     imgUrl: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&auto=format&fit=crop&q=80',
     caption: 'I stop for cars, always.'
   },
+  // 3. New items from calculated-chas folder with title referenced from file name with correct spelling & spacing
   {
-    id: 'item-6',
+    id: 'item-always-inloop',
     type: 'polaroid',
-    x: 250,
-    y: 380,
-    rotation: -4,
+    x: 40,
+    y: 50,
+    rotation: -4.5,
     pinColor: 'red',
-    imgUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=80',
-    caption: 'my buddy, Olive'
+    imgUrl: alwaysInloopImg,
+    caption: 'Always in Loop'
   },
   {
-    id: 'item-7',
-    type: 'music',
-    x: 450,
-    y: 375,
-    rotation: 2,
-    pinColor: 'red',
-    track: 'On Repeat',
-    artist: 'Apple Music / Spotify'
+    id: 'item-always-protector',
+    type: 'polaroid',
+    x: 235,
+    y: 70,
+    rotation: 3,
+    pinColor: 'purple',
+    imgUrl: alwaysProtectorImg,
+    caption: 'Always Protector'
   },
   {
-    id: 'item-8',
+    id: 'item-fev-food',
     type: 'polaroid',
-    x: 650,
-    y: 350,
+    x: 755,
+    y: 45,
     rotation: -3,
     pinColor: 'green',
-    imgUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500&auto=format&fit=crop&q=80',
-    caption: 'the happy noise'
+    imgUrl: fevFoodImg,
+    caption: 'Favorite Food'
   },
   {
-    id: 'item-9',
-    type: 'postit',
-    x: 850,
-    y: 460,
-    rotation: 6,
-    caption: 'My brain has 40 tabs open at all times.'
+    id: 'item-fev-place-ever',
+    type: 'polaroid',
+    x: 960,
+    y: 65,
+    rotation: 4.5,
+    pinColor: 'yellow',
+    imgUrl: fevPlaceEverImg,
+    caption: 'Favorite Place Ever'
+  },
+  {
+    id: 'item-giftSillhave',
+    type: 'polaroid',
+    x: 265,
+    y: 395,
+    rotation: -2.5,
+    pinColor: 'red',
+    imgUrl: giftSillhaveImg,
+    caption: 'Gift Still Have'
+  },
+  {
+    id: 'item-me-with-myself',
+    type: 'polaroid',
+    x: 480,
+    y: 410,
+    rotation: 3,
+    pinColor: 'blue',
+    imgUrl: meWithMyselfImg,
+    caption: 'Me with Myself'
+  },
+  {
+    id: 'item-myLOve',
+    type: 'polaroid',
+    x: 695,
+    y: 385,
+    rotation: -4,
+    pinColor: 'purple',
+    imgUrl: myLoveImg,
+    caption: 'My Love'
+  },
+  {
+    id: 'item-the-setup',
+    type: 'polaroid',
+    x: 915,
+    y: 375,
+    rotation: 2,
+    pinColor: 'green',
+    imgUrl: theSetupImg,
+    caption: 'The Setup I Love to Work'
   }
 ];
 
@@ -212,9 +235,6 @@ export function CalculatedChaos() {
   return (
     <section className="chaos-section" id="chaos-section" ref={sectionRef}>
       <div className="chaos-header">
-        <div className="chaos-tag">
-          <span>⚡</span> OFF THE CLOCK
-        </div>
         <h2 className="chaos-title">
           Calculated <span>chaos.</span>
         </h2>
@@ -265,9 +285,17 @@ export function CalculatedChaos() {
                   {item.title && <div className="note-paper-title">{item.title}</div>}
                   {item.content && (
                     <ul className="note-paper-list">
-                      {item.content.map((line, idx) => (
-                        <li key={idx}>{line}</li>
-                      ))}
+                      {item.content.map((line, idx) => {
+                        const isHeader = !line.startsWith('•');
+                        return (
+                          <li
+                            key={idx}
+                            className={isHeader ? 'note-paper-header-item' : 'note-paper-bullet-item'}
+                          >
+                            {line}
+                          </li>
+                        );
+                      })}
                     </ul>
                   )}
                 </div>

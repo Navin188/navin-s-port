@@ -183,9 +183,6 @@ export const Projects = () => {
 
       {/* Standard Header Flow (NO OVERLAP!) */}
       <div className="cinematic-header-flow">
-        <div className="cinematic-tag">
-          <span>Projects</span>
-        </div>
         <h2 className="cinematic-title">Projects</h2>
       </div>
 
@@ -203,17 +200,6 @@ export const Projects = () => {
             <div className="focus-card-left">
               <div>
                 <div className="focus-card-top-row">
-                  <div
-                    className="focus-card-category"
-                    style={{
-                      background: 'var(--bg-input)',
-                      border: '1px solid var(--border-card)',
-                      color: proj.accentColor,
-                    }}
-                  >
-                    {proj.icon}
-                    <span>{proj.badge}</span>
-                  </div>
                   <span className="focus-card-index">{proj.indexNum}</span>
                 </div>
 

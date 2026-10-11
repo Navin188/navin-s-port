@@ -221,7 +221,8 @@
 
 .note-paper-list {
   margin: 0;
-  padding-left: 1.2rem;
+  padding: 0;
+  list-style: none;
   font-size: 0.8rem;
   line-height: 1.6;
   color: #334155;
@@ -229,6 +230,19 @@
 
 .note-paper-list li {
   margin-bottom: 2px;
+  list-style: none;
+}
+
+.note-paper-header-item {
+  font-weight: 700;
+  color: #0F172A;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.note-paper-bullet-item {
+  padding-left: 0.25rem;
+  color: #475569;
 }
 
 /* Music Widget Card */

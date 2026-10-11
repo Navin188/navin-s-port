@@ -56,7 +56,33 @@ export const ReelsSection: React.FC = () => {
   const [videoLoading, setVideoLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const categoryReqId = useRef(0);
+
+  // Reset reels when user scrolls away from this section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry.isIntersecting) {
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
+          setActiveCategory(null);
+          setCurrentIndex(0);
+        }
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Fetch reels when category changes
   useEffect(() => {
@@ -156,17 +182,12 @@ export const ReelsSection: React.FC = () => {
   const currentTheme = CATEGORIES.find((c) => c.id === activeCategory)?.accentClass || 'theme-corporate';
 
   return (
-    <section className={`reels-section ${currentTheme}`} id="reels-section">
+    <section className={`reels-section ${currentTheme}`} id="reels-section" ref={sectionRef}>
       <div className="reels-glow-ambient" />
 
       <div className="reels-container">
         {/* Left Column: Context, Category Switcher & Reel Description */}
         <div className="reels-left-col">
-          <div className="reels-eyebrow">
-            <Sparkles size={14} className="eyebrow-icon" />
-            <span>BEYOND THE JOB TITLE</span>
-          </div>
-
           <h2 className="reels-heading">Corporate by Day. Poet by Scroll.</h2>
 
           <div className="reels-copy">

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Plus, Move, MessageSquare, User } from 'lucide-react';
+import { Plus, Move, User } from 'lucide-react';
 import {
   fetchStickyNotesFromDB,
   createStickyNoteInDB,
@@ -199,10 +199,6 @@ export const NoteWall = () => {
       {/* Top Bar */}
       <div className="notewall-header">
         <div className="notewall-title-box">
-          <div className="notewall-tag">
-            <MessageSquare size={14} color="var(--accent-primary)" />
-            <span>Stickyboard</span>
-          </div>
           <h2 className="notewall-heading">Stickyboard</h2>
         </div>
 
