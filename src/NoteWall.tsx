@@ -3,6 +3,10 @@ import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Plus, Move, MessageSquare } from 'lucide-react';
+import {
+  fetchStickyNotesFromDB,
+  createStickyNoteInDB,
+} from './services/supabaseService';
 import './NoteWall.css';
 
 gsap.registerPlugin(Draggable, ScrollTrigger);
@@ -17,54 +21,64 @@ export interface StickyNoteItem {
   colorClass: string;
 }
 
-const initialMemes: StickyNoteItem[] = [
-  {
-    id: 'meme-1',
-    badge: 'IT MEME #01',
-    text: '💻 "It works on my machine"',
-    top: '50px',
-    left: '50px',
-    rotate: -4,
-    colorClass: 'note-card-yellow',
-  },
-  {
-    id: 'meme-2',
-    badge: 'IT MEME #02',
-    text: '🔄 "Did you clear the cache?"',
-    top: '70px',
-    left: '360px',
-    rotate: 3,
-    colorClass: 'note-card-pink',
-  },
-  {
-    id: 'meme-3',
-    badge: 'IT MEME #03',
-    text: '📧 "Meeting could have been an email"',
-    top: '240px',
-    left: '110px',
-    rotate: -3,
-    colorClass: 'note-card-blue',
-  },
-  {
-    id: 'meme-4',
-    badge: 'IT MEME #04',
-    text: '🎨 "CSS is my passion"',
-    top: '220px',
-    left: '450px',
-    rotate: 4,
-    colorClass: 'note-card-purple',
-  },
-];
-
 const colorPaletteClasses = ['note-card-yellow', 'note-card-pink', 'note-card-blue', 'note-card-purple'];
+
+// Calculates slot coordinates across the ENTIRE board width (5 columns x 3 rows = 15 distinct slots)
+const getSlotCoordinates = (index: number) => {
+  const COLS = 5;
+  const ROWS = 3;
+  const slot = index % (COLS * ROWS);
+  const col = slot % COLS;
+  const row = Math.floor(slot / COLS);
+
+  // Spans full width from left (3%) through center (42%) to right (80.5%)
+  const leftPercent = 3 + col * 19.5;
+  const topPx = 35 + row * 145;
+
+  // Natural organic jitter and tilt
+  const jitterX = ((index * 13) % 16) - 8;
+  const jitterY = ((index * 17) % 16) - 8;
+  const rotate = ((index * 7) % 11) - 5;
+
+  return {
+    top: `${Math.max(25, Math.min(340, topPx + jitterY))}px`,
+    left: `calc(${leftPercent}% + ${jitterX}px)`,
+    rotate: rotate === 0 ? (index % 2 === 0 ? -3 : 3) : rotate,
+  };
+};
 
 export const NoteWall = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const boardRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const [notes, setNotes] = useState<StickyNoteItem[]>(initialMemes);
+  const [notes, setNotes] = useState<StickyNoteItem[]>([]);
   const [inputText, setInputText] = useState('');
+  const [submittingNote, setSubmittingNote] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Load Sticky Notes from Supabase
+  useEffect(() => {
+    const loadDBNotes = async () => {
+      const { data, error } = await fetchStickyNotesFromDB();
+      if (!error && data && data.length > 0) {
+        const formatted: StickyNoteItem[] = data.map((item, i) => {
+          const coords = getSlotCoordinates(i);
+          return {
+            id: item.id || `db-note-${i}`,
+            badge: item.badge || 'COMMUNITY NOTE',
+            text: item.message,
+            top: coords.top,
+            left: coords.left,
+            rotate: coords.rotate,
+            colorClass: item.color_class || colorPaletteClasses[i % colorPaletteClasses.length],
+          };
+        });
+        setNotes(formatted);
+      }
+    };
+    loadDBNotes();
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -112,23 +126,42 @@ export const NoteWall = () => {
     }
   }, []);
 
-  const handleAddNote = (e: React.FormEvent) => {
+  const handleAddNote = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputText.trim()) return;
+    if (!inputText.trim() || submittingNote) return;
+    setErrorMsg(null);
+    setSubmittingNote(true);
 
-    const randomTop = `${Math.floor(Math.random() * 220 + 40)}px`;
-    const randomLeft = `${Math.floor(Math.random() * 450 + 80)}px`;
-    const randomRotate = Math.floor(Math.random() * 10 - 5);
-    const randomColor = colorPaletteClasses[notes.length % colorPaletteClasses.length];
+    const nextIndex = notes.length;
+    const coords = getSlotCoordinates(nextIndex);
+    const color = colorPaletteClasses[nextIndex % colorPaletteClasses.length];
+    const textToInsert = inputText.trim();
+
+    const { data, error } = await createStickyNoteInDB({
+      message: textToInsert,
+      author_name: 'Visitor',
+      badge: 'COMMUNITY NOTE',
+      color_class: color,
+      top: coords.top,
+      left: coords.left,
+      rotate: coords.rotate,
+    });
+
+    setSubmittingNote(false);
+
+    if (error) {
+      setErrorMsg(error);
+      return;
+    }
 
     const newNote: StickyNoteItem = {
-      id: `user-note-${Date.now()}`,
-      badge: 'COMMUNITY NOTE',
-      text: inputText.trim(),
-      top: randomTop,
-      left: randomLeft,
-      rotate: randomRotate,
-      colorClass: randomColor,
+      id: data?.id || `user-note-${Date.now()}`,
+      badge: data?.badge || 'COMMUNITY NOTE',
+      text: textToInsert,
+      top: coords.top,
+      left: coords.left,
+      rotate: coords.rotate,
+      colorClass: color,
     };
 
     setNotes((prev) => [...prev, newNote]);
@@ -165,12 +198,13 @@ export const NoteWall = () => {
             type="text"
             className="notewall-input"
             placeholder="Write a custom note..."
+            maxLength={280}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />
-          <button type="submit" className="notewall-submit-btn">
+          <button type="submit" className="notewall-submit-btn" disabled={submittingNote}>
             <Plus size={16} />
-            <span>Add Note</span>
+            <span>{submittingNote ? 'Posting...' : 'Add Note'}</span>
           </button>
         </form>
 
@@ -178,11 +212,23 @@ export const NoteWall = () => {
         <div className="notewall-count-badge">Total Notes: {notes.length}</div>
       </div>
 
+      {errorMsg && (
+        <div style={{ color: '#EF4444', fontSize: '0.8rem', textAlign: 'center', marginTop: '0.5rem' }}>
+          {errorMsg}
+        </div>
+      )}
+
       {/* Stickyboard Container */}
       <div className="stickyboard-workspace" ref={boardRef}>
         <div className="stickyboard-bg-hint">
           <Move size={15} /> Drag &amp; Throw Sticky Notes
         </div>
+
+        {notes.length === 0 && (
+          <div style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: 600, pointerEvents: 'none', textAlign: 'center' }}>
+            ✨ No sticky notes posted yet. Write a note above and click "Add Note"!
+          </div>
+        )}
 
         {/* Render Draggable Sticky Notes */}
         {notes.map((note, index) => (

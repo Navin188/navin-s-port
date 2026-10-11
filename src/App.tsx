@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import InteractiveMapHero from './InteractiveMapHero';
 import About from './About';
 import Journey from './Journey';
@@ -12,6 +13,20 @@ import useSmoothScroll from './useSmoothScroll';
 export function App() {
   // Initialize Lenis inertia smooth scrolling synced with GSAP ScrollTrigger
   useSmoothScroll();
+
+  // Ensure page always starts at the top (Hero section) on load/refresh
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    const onBeforeUnload = () => {
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, []);
 
   return (
     <div style={{ margin: 0, padding: 0, width: '100vw', minHeight: '100vh', backgroundColor: '#050505', overflowX: 'hidden' }}>

@@ -5,9 +5,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Clear GSAP ScrollTrigger's internal scroll memory so it never restores scrolled positions on reload
+ScrollTrigger.clearScrollMemory('manual');
+
 export const useSmoothScroll = () => {
   useEffect(() => {
-    // 1. Initialize Lenis smooth scroll
+    // 1. Force browser to always start from the top section on page load / refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // 2. Initialize Lenis smooth scroll
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -16,7 +25,11 @@ export const useSmoothScroll = () => {
       touchMultiplier: 1.5,
     });
 
-    // 2. Connect Lenis scroll events to GSAP ScrollTrigger
+    // Reset Lenis internal state to 0 immediately
+    lenis.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+
+    // Connect Lenis scroll events to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
     // 3. Add Lenis RAF to GSAP Ticker for 60fps frame sync
