@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, FileText, ArrowUpRight } from 'lucide-react';
 import resumeFile from './assets/NavinBoddhul.pdf';
+import { trackResumeDownload } from './services/analytics';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -78,6 +79,7 @@ export const Footer = ({
               download="Navin_Boddhul_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackResumeDownload}
               className="footer-link-btn"
             >
               <FileText size={16} color="var(--accent-blue)" />

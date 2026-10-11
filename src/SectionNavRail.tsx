@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { trackSectionView } from './services/analytics';
 import './SectionNavRail.css';
 
 interface NavSection {
@@ -43,10 +44,13 @@ export const SectionNavRail = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string, label?: string) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (label) {
+        trackSectionView(id, label);
+      }
     }
   };
 
@@ -56,7 +60,7 @@ export const SectionNavRail = () => {
         <button
           key={sec.id}
           type="button"
-          onClick={() => scrollToSection(sec.id)}
+          onClick={() => scrollToSection(sec.id, sec.label)}
           className={`sn-item ${activeId === sec.id ? 'sn-active' : ''}`}
           aria-label={`Scroll to ${sec.label}`}
         >
