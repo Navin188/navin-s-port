@@ -364,10 +364,50 @@
 
 @media (max-width: 1024px) {
   .journey-section {
-    padding: 3rem 1.5rem;
+    padding: clamp(3rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
   }
   .journey-side-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
+  }
+  /* Dependent Column Ordering: Interactive Map on TOP, Selected Milestone Card directly BELOW */
+  .journey-right-column {
+    order: 1;
+    width: 100%;
+  }
+  .journey-details-card {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .journey-section {
+    padding: 2.75rem 1rem;
+  }
+  .journey-details-card {
+    padding: 1.25rem;
+    min-height: auto;
+  }
+  .card-heading-title {
+    font-size: 1.15rem;
+  }
+  .map-canvas-wrapper {
+    height: 310px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .journey-section {
+    padding: 2.25rem 0.75rem;
+  }
+  .map-canvas-wrapper {
+    height: 270px;
+  }
+  .stepper-range-text {
+    font-size: 0.72rem;
   }
 }

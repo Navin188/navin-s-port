@@ -9,7 +9,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding-top: 3rem;
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+  padding-bottom: 2rem;
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -318,9 +319,31 @@
     grid-template-columns: 1fr;
     width: 85vw;
     height: auto;
-    min-height: 460px;
+    min-height: 440px;
   }
   .focus-card-right {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .focus-card {
+    width: 88vw;
+    margin: 0 0.5rem;
+    min-height: 400px;
+    border-radius: 18px;
+  }
+  .focus-card-left {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .focus-card {
+    width: 86vw;
+    min-height: 380px;
+  }
+  .focus-card-left {
+    padding: 1.25rem 1rem;
   }
 }

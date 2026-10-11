@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 5rem 1.5rem 5rem;
+  padding: clamp(3.5rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
   box-sizing: border-box;
   overflow: hidden;
   font-family: var(--font-family);
@@ -384,7 +384,7 @@
 /* Responsive */
 @media (max-width: 640px) {
   .ts-section {
-    padding: 2rem 1rem 1.5rem;
+    padding: 2.75rem 1rem 2rem;
   }
 
   .ts-title {
@@ -405,5 +405,20 @@
   .ts-touchpad-btn {
     width: 38px;
     height: 38px;
+  }
+}
+
+@media (max-width: 360px) {
+  .ts-section {
+    padding: 2.25rem 0.75rem 1.75rem;
+  }
+
+  .ts-title {
+    font-size: 1.5rem;
+  }
+
+  .ts-touchpad-btn {
+    width: 32px;
+    height: 32px;
   }
 }

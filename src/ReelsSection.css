@@ -598,3 +598,28 @@
     height: 38px;
   }
 }
+
+@media (max-width: 360px) {
+  .reels-section {
+    padding: 2.25rem 0.75rem;
+  }
+
+  .phone-nav-controls {
+    gap: 0.4rem;
+  }
+
+  .iphone-mockup-wrapper {
+    width: 205px;
+    height: 415px;
+    border-radius: 32px;
+  }
+
+  .iphone-screen {
+    border-radius: 26px;
+  }
+
+  .nav-arrow-btn {
+    width: 32px;
+    height: 32px;
+  }
+}

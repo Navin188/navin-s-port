@@ -3,6 +3,9 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   background-color: #0b131e;
   display: flex;
@@ -17,6 +20,9 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -398,4 +404,103 @@
   font-size: 0.72rem;
   color: #94A3B8;
   font-weight: 600;
+}
+
+/* ==============================================================================
+   RESPONSIVE BREAKPOINTS (Tablet, Mobile & Foldable Devices)
+   ============================================================================== */
+@media (max-width: 1024px) {
+  .map-overlay-header {
+    top: 1.5rem;
+    left: 1.5rem;
+    max-width: calc(100vw - 14rem);
+  }
+
+  .map-overlay-title {
+    font-size: clamp(1.85rem, 3.8vw, 2.5rem);
+  }
+
+  .map-controls-topright {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-overlay-header {
+    top: 1.25rem;
+    left: 1.25rem;
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  .map-controls-topright {
+    top: auto;
+    bottom: 5.5rem;
+    right: 1.25rem;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .map-overlay-header {
+    top: 1.25rem;
+    left: 1.25rem;
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  .map-overlay-title {
+    font-size: 1.75rem;
+  }
+
+  .map-controls-topright {
+    top: auto;
+    bottom: 5.5rem;
+    right: 1.25rem;
+    gap: 0.5rem;
+  }
+
+  .map-control-btn {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.72rem;
+  }
+
+  .map-flyin-pill {
+    bottom: 1.5rem;
+    padding: 0.5rem 1.15rem;
+    font-size: 0.75rem;
+  }
+
+  .hotspot-label-pill {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.75rem;
+    margin-bottom: 4px;
+  }
+
+  .map-modal-overlay {
+    top: 3.5rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+    padding: 1.25rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Foldable devices (e.g. Galaxy Z Fold folded 280px-320px) */
+  .map-overlay-title {
+    font-size: 1.45rem;
+  }
+
+  .map-controls-topright {
+    bottom: 4.8rem;
+    right: 0.75rem;
+  }
+
+  .map-control-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.68rem;
+  }
 }

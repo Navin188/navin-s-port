@@ -9,7 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 3rem 1.5rem;
+  padding: clamp(3.5rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -83,6 +83,36 @@
 @media (max-width: 1024px) {
   .chaos-board-container {
     height: 900px;
+  }
+}
+
+@media (max-width: 640px) {
+  .chaos-section {
+    padding: 2.5rem 1rem;
+  }
+  .chaos-board-container {
+    height: 750px;
+    border-radius: 20px;
+  }
+  .polaroid-card {
+    width: 145px;
+    padding: 8px 8px 14px 8px;
+  }
+  .polaroid-img-box {
+    height: 115px;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Foldable devices */
+  .chaos-board-container {
+    height: 650px;
+  }
+  .polaroid-card {
+    width: 125px;
+  }
+  .polaroid-img-box {
+    height: 95px;
   }
 }
 
