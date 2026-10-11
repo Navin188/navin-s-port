@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import heroImage from './assets/heroimage.png';
+import heroImage from './assets/heroimage.webp';
 import myImage from './assets/myimage.jfif';
 import './InteractiveMapHero.css';
 
@@ -194,6 +194,9 @@ export function InteractiveMapHero() {
           src={heroImage}
           alt="Tech City Overworld Landscape"
           className="map-hero-img"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
 
         {/* Ambient Atmospheric Overlay for eye-comfort & high contrast */}
