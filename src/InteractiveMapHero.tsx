@@ -27,31 +27,31 @@ const HOTSPOTS: HotspotData[] = [
     id: 'degree',
     label: 'BIGCE - Engineering',
     year: '2020',
-    topPct: 45,
-    leftPct: 18,
+    topPct: 24,
+    leftPct: 20,
     chapter: 'CHAPTER 01 · 2016 - 2020',
     title: 'BIGCE (Engineering)',
-    role: 'Bachelor of Engineering in Computer Science',
-    description: 'Graduated with Computer Engineering degree. Built strong foundations in algorithm analysis, data structures, web application architecture, and software engineering.',
+    role: 'Bachelor of Engineering in Electronics and Telecommunication',
+    description: 'Graduated with Electronics and Telecommunication Engineering degree. Built strong foundations in algorithm analysis, data structures, web application architecture, and software engineering.',
     metrics: [
       { val: '8.4 CGPA', label: 'Academic Score' },
-      { val: '100%', label: 'CS Engineering' }
+      { val: '100%', label: 'Electronics and Telecommunication' }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=300&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=300&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300&auto=format&fit=crop&q=80'
+      'https://tse4.mm.bing.net/th/id/OIP.lF0ruirxtDom_dTf9a90tgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
+      'https://www.collegebatch.com/static/clg-gallery/bharat-ratna-indira-gandhi-college-of-engineering-solapur-284644.webp',
+      'https://collegevaani.com/new-assets/img/university/4670-9455bda388.jpg'
     ]
   },
   {
     id: 'navin',
     label: 'Navin - UI Developer',
-    year: 'LOCATION',
+    year: 'Pune',
     topPct: 72,
     leftPct: 50,
     chapter: 'THE CREATOR',
     title: 'Navin Boddhul',
-    role: 'UI Designer turned Frontend Developer',
+    role: 'UI Designer & Frontend Developer',
     description: 'Obsessed with fluid micro-interactions, GSAP scroll animations, and building state-of-the-art web products that wow visitors and deliver flawless UX.',
     metrics: [
       { val: 'UI + FE', label: 'Full Spectrum' },
@@ -59,8 +59,8 @@ const HOTSPOTS: HotspotData[] = [
     ],
     gallery: [
       myImage,
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300&auto=format&fit=crop&q=80'
+      'https://media.licdn.com/dms/image/v2/D4D22AQE4XT_qBkhqWQ/feedshare-shrink_800/feedshare-shrink_800/0/1685782292269?e=1793232000&v=beta&t=V1x6jr7BVL5V08nWgm5bSfC0YaL5oNHVpnBl4J4XLxQ',
+      'https://media.licdn.com/dms/image/v2/D4D2DAQE8hvxM9R2o3g/profile-treasury-image-shrink_8192_8192/profile-treasury-image-shrink_8192_8192/0/1685782917512?e=1792328400&v=beta&t=lQ-gr3kvwd4yL94BQOhvLaw_LAJf8yuYlWrEq8-JhG8'
     ],
     isAvatar: true
   },
@@ -68,20 +68,20 @@ const HOTSPOTS: HotspotData[] = [
     id: 'shaurya',
     label: 'Shaurya Technosoft',
     year: '2021-PRESENT',
-    topPct: 45,
-    leftPct: 82,
+    topPct: 38,
+    leftPct: 87,
     chapter: 'CHAPTER 02 · FEB 2021 - PRESENT',
     title: 'Shaurya Technosoft',
     role: 'Frontend Developer (4+ Years Exp)',
     description: 'Spearheaded enterprise frontend architectures, transforming Figma wireframes into dynamic, high-performance, and API-driven web applications using React, TypeScript, Tailwind, and GSAP.',
     metrics: [
       { val: '4+ Years', label: 'Frontend Exp' },
-      { val: '15+ Apps', label: 'Shipped to Prod' }
+      { val: '15+ Web Apps', label: 'Shipped to Prod' }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=300&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&auto=format&fit=crop&q=80'
+      'https://5.imimg.com/data5/SELLER/Default/2022/5/SR/FJ/RC/6918524/whatsapp-image-2022-05-05-at-6-27-13-pm-1-1--1000x1000.jpeg',
+      'https://tse3.mm.bing.net/th/id/OIP.cwjbBP1-gczflNZntZYXdQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
+      'https://5.imimg.com/data5/NSDMERP/Board/2022/4/GS/PW/UW/6918524/6918524-board-1649672359032-1000x1000.jpg'
     ]
   }
 ];
