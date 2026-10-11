@@ -203,3 +203,192 @@ export const createTestimonialInDB = async (
     return { data: null, error: err.message || 'Database submission failed' };
   }
 };
+
+/* ── Portfolio Reels Service ─────────────────────────────────────────── */
+
+export interface PortfolioReelRecord {
+  id: string;
+  asset_key: string;
+  title: string;
+  description: string;
+  category: 'corporateand-fun' | 'poetryand-feeling';
+  video_path: string;
+  thumbnail_path?: string;
+  sort_order: number;
+  is_published: boolean;
+  created_at?: string;
+}
+
+const LOCAL_FALLBACK_REELS: Record<'corporateand-fun' | 'poetryand-feeling', PortfolioReelRecord[]> = {
+  'corporateand-fun': [
+    {
+      id: 'local-corp-01',
+      asset_key: 'corporate-01',
+      title: 'Standup Chronicles: The Sync',
+      description: 'When a 15-minute morning check-in transforms into an impromptu deep-dive architectural debate.',
+      category: 'corporateand-fun',
+      video_path: '/optimized-reels/corporateand-fun/corporate-01.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/corporateand-fun/corporate-01.jpg',
+      sort_order: 1,
+      is_published: true,
+    },
+    {
+      id: 'local-corp-02',
+      asset_key: 'corporate-02',
+      title: 'Fueling The Sprint',
+      description: 'The sacred routine: converting hot espresso into pixel-perfect frontend micro-interactions.',
+      category: 'corporateand-fun',
+      video_path: '/optimized-reels/corporateand-fun/corporate-02.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/corporateand-fun/corporate-02.jpg',
+      sort_order: 2,
+      is_published: true,
+    },
+    {
+      id: 'local-corp-03',
+      asset_key: 'corporate-03',
+      title: 'Shipping on Friday 5 PM',
+      description: 'That adrenaline spike when production deployment passes all green without a hitch.',
+      category: 'corporateand-fun',
+      video_path: '/optimized-reels/corporateand-fun/corporate-03.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/corporateand-fun/corporate-03.jpg',
+      sort_order: 3,
+      is_published: true,
+    },
+    {
+      id: 'local-corp-04',
+      asset_key: 'corporate-04',
+      title: 'Design Critique Vibes',
+      description: 'Collaborative brainstorms where daring UI ideas turn into tested design system components.',
+      category: 'corporateand-fun',
+      video_path: '/optimized-reels/corporateand-fun/corporate-04.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/corporateand-fun/corporate-04.jpg',
+      sort_order: 4,
+      is_published: true,
+    },
+    {
+      id: 'local-corp-05',
+      asset_key: 'corporate-05',
+      title: 'Off-Clock Shenanigans',
+      description: 'The lighthearted side between code reviews — keeping the energy vibrant and the spirits high.',
+      category: 'corporateand-fun',
+      video_path: '/optimized-reels/corporateand-fun/corporate-05.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/corporateand-fun/corporate-05.jpg',
+      sort_order: 5,
+      is_published: true,
+    },
+  ],
+  'poetryand-feeling': [
+    {
+      id: 'local-poet-02',
+      asset_key: 'poetry-02',
+      title: 'Echoes of the Night',
+      description: 'Late night musings under distant city lights when solitary thoughts shape into gentle verses.',
+      category: 'poetryand-feeling',
+      video_path: '/optimized-reels/poetryand-feeling/poetry-02.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/poetryand-feeling/poetry-02.jpg',
+      sort_order: 1,
+      is_published: true,
+    },
+    {
+      id: 'local-poet-03',
+      asset_key: 'poetry-03',
+      title: 'A Letter to Tomorrow',
+      description: 'Verses on hope, inner resilience, and finding quiet harmony amid the relentless digital noise.',
+      category: 'poetryand-feeling',
+      video_path: '/optimized-reels/poetryand-feeling/poetry-03.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/poetryand-feeling/poetry-03.jpg',
+      sort_order: 2,
+      is_published: true,
+    },
+    {
+      id: 'local-poet-01',
+      asset_key: 'poetry-01',
+      title: 'Whispers of the Monsoon',
+      description: 'Reflections on quiet rainfall, nostalgia, and the unspoken words lingering between pauses.',
+      category: 'poetryand-feeling',
+      video_path: '/optimized-reels/poetryand-feeling/poetry-01.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/poetryand-feeling/poetry-01.jpg',
+      sort_order: 3,
+      is_published: true,
+    },
+    {
+      id: 'local-poet-04',
+      asset_key: 'poetry-04',
+      title: 'Shades of Silence',
+      description: 'A heartfelt recital exploring the profound comfort discovered in tranquil, peaceful stillness.',
+      category: 'poetryand-feeling',
+      video_path: '/optimized-reels/poetryand-feeling/poetry-04.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/poetryand-feeling/poetry-04.jpg',
+      sort_order: 4,
+      is_published: true,
+    },
+    {
+      id: 'local-poet-05',
+      asset_key: 'poetry-05',
+      title: 'The Soul of Words',
+      description: 'Unfiltered emotional expression woven through rhythm, cadence, and heartfelt vulnerability.',
+      category: 'poetryand-feeling',
+      video_path: '/optimized-reels/poetryand-feeling/poetry-05.mp4',
+      thumbnail_path: '/optimized-reels/thumbnails/poetryand-feeling/poetry-05.jpg',
+      sort_order: 5,
+      is_published: true,
+    },
+  ],
+};
+
+export const fetchReelsByCategory = async (
+  category: 'corporateand-fun' | 'poetryand-feeling'
+): Promise<{ data: PortfolioReelRecord[]; error: string | null; isFallback?: boolean }> => {
+  if (!isSupabaseConfigured) {
+    return { data: LOCAL_FALLBACK_REELS[category] || [], error: null, isFallback: true };
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('portfolio_reels')
+      .select('id, asset_key, title, description, category, video_path, thumbnail_path, sort_order, is_published, created_at')
+      .eq('category', category)
+      .eq('is_published', true)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.warn('[Supabase] portfolio_reels query error:', error.message);
+      // Fallback to local verified optimized reels if DB migration is pending in user project
+      return { data: LOCAL_FALLBACK_REELS[category] || [], error: error.message, isFallback: true };
+    }
+
+    if (!data || data.length === 0) {
+      // If table exists but has no records yet, use local fallback
+      return { data: LOCAL_FALLBACK_REELS[category] || [], error: null, isFallback: true };
+    }
+
+    // Resolve any raw storage relative paths to public URLs
+    const resolved: PortfolioReelRecord[] = data.map((item: any) => {
+      let videoUrl = item.video_path;
+      let thumbUrl = item.thumbnail_path;
+
+      if (videoUrl && !videoUrl.startsWith('http') && !videoUrl.startsWith('/')) {
+        const { data: pubUrl } = supabase.storage.from('portfolio-reels').getPublicUrl(videoUrl);
+        videoUrl = pubUrl.publicUrl;
+      }
+
+      if (thumbUrl && !thumbUrl.startsWith('http') && !thumbUrl.startsWith('/')) {
+        const { data: pubThumb } = supabase.storage.from('portfolio-reels').getPublicUrl(thumbUrl);
+        thumbUrl = pubThumb.publicUrl;
+      }
+
+      return {
+        ...item,
+        video_path: videoUrl,
+        thumbnail_path: thumbUrl,
+      };
+    });
+
+    return { data: resolved, error: null, isFallback: false };
+  } catch (err: any) {
+    console.warn('[Supabase] Fetch reels exception:', err);
+    return { data: LOCAL_FALLBACK_REELS[category] || [], error: err.message || 'Network error', isFallback: true };
+  }
+};
+

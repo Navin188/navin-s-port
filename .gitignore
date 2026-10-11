@@ -25,3 +25,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw unoptimized video assets (kept local, optimized copies in public/optimized-reels)
+src/assets/ReelSecion-videos/
+src/assets/ReelSection-videos/

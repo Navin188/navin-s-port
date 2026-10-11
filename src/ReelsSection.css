@@ -1,0 +1,596 @@
+/* ==============================================================================
+   REELS SECTION STYLING (Corporate & Fun vs Poetry & Feelings)
+   ============================================================================== */
+
+.reels-section {
+  position: relative;
+  width: 100vw;
+  min-height: 85vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 5rem 3rem 4.5rem 3rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Category Theme Ambient Glows */
+.reels-glow-ambient {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.15;
+  top: 30%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+
+.theme-corporate .reels-glow-ambient {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+}
+
+.theme-poetry .reels-glow-ambient {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
+}
+
+/* Layout Container (60% Left, 40% Right Desktop) */
+.reels-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left Column */
+.reels-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  max-width: 600px;
+}
+
+.reels-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.38rem 0.95rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  width: fit-content;
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.theme-corporate .reels-eyebrow {
+  color: var(--accent-primary);
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.theme-poetry .reels-eyebrow {
+  color: #7C3AED;
+  border-color: rgba(124, 58, 237, 0.3);
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.eyebrow-icon {
+  animation: pulse-slow 3s infinite ease-in-out;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.7; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.reels-heading {
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif !important;
+}
+
+.reels-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.reels-lead {
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.reels-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Category Tabs */
+.reels-tabs-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.reels-tabs-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.reels-tabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.reels-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reels-tab-btn:hover {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.theme-corporate .reels-tab-btn.active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--accent-primary);
+  color: #059669;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.18);
+}
+
+.theme-poetry .reels-tab-btn.active {
+  background: rgba(124, 58, 237, 0.12);
+  border-color: #7C3AED;
+  color: #7C3AED;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+}
+
+/* Right Column (iPhone & Navigation) */
+.reels-right-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  width: 100%;
+}
+
+/* Navigation Arrow Buttons Beside Phone */
+.nav-arrow-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.nav-arrow-btn:hover:not(:disabled) {
+  background: #FFFFFF;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.theme-corporate .nav-arrow-btn:hover:not(:disabled) {
+  border-color: var(--accent-primary);
+  color: #059669;
+}
+
+.theme-poetry .nav-arrow-btn:hover:not(:disabled) {
+  border-color: #7C3AED;
+  color: #7C3AED;
+}
+
+.nav-arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* iPhone Mockup Outer Geometry */
+.iphone-mockup-wrapper {
+  position: relative;
+  width: 295px;
+  height: 597px; /* 295 * (1772 / 876) = ~597px */
+  margin: 0 auto;
+  border-radius: 46px;
+  box-shadow: 
+    0 25px 60px -15px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  user-select: none;
+  background: #000000;
+  flex-shrink: 0;
+}
+
+/* iPhone Hardware Overlay Frame (Placed ON TOP of video) */
+.iphone-frame-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  object-fit: fill;
+}
+
+/* Screen Area inside Bezel */
+.iphone-screen {
+  position: absolute;
+  top: 2.2%;
+  left: 4.4%;
+  width: 91.2%;
+  height: 95.6%;
+  border-radius: 38px;
+  overflow: hidden;
+  background: #000000;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Video inside screen */
+.iphone-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+}
+
+/* Screen State Box (Loading / Empty / Error / Welcome) */
+.screen-state-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.75rem 1.25rem;
+  box-sizing: border-box;
+  text-align: center;
+  color: #94A3B8;
+  font-size: 0.85rem;
+  background: #0B0F17;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Initial Welcome / Standby State inside Phone */
+.screen-state-box.welcome-state {
+  background: radial-gradient(circle at 50% 25%, #1E293B 0%, #0F172A 60%, #020617 100%);
+  gap: 0.75rem;
+  padding: 2.5rem 1.25rem 2rem 1.25rem;
+}
+
+.welcome-icon-bubble {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38BDF8;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+  margin-bottom: 0.25rem;
+  animation: pulse-welcome 3s infinite ease-in-out;
+}
+
+@keyframes pulse-welcome {
+  0%, 100% { transform: scale(0.96); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); }
+}
+
+.welcome-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.welcome-subtitle {
+  font-size: 0.8rem;
+  color: #94A3B8;
+  line-height: 1.45;
+  margin: 0 0 0.5rem 0;
+  max-width: 210px;
+}
+
+.welcome-quick-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 210px;
+}
+
+.welcome-pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.welcome-pill-btn.corporate {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #34D399;
+}
+
+.welcome-pill-btn.corporate:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: #34D399;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+.welcome-pill-btn.poetry {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  color: #C084FC;
+}
+
+.welcome-pill-btn.poetry:hover {
+  background: rgba(168, 85, 247, 0.22);
+  border-color: #C084FC;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.25);
+}
+
+.counter-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.reels-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #38BDF8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.reels-spinner.small {
+  width: 24px;
+  height: 24px;
+  border-width: 2.5px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.video-buffering-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.75rem;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Screen Controls Overlay (Icons & Progress) */
+.screen-controls-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 0.85rem;
+  box-sizing: border-box;
+  z-index: 6;
+}
+
+.screen-top-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.6rem; /* Beneath iPhone speaker notch */
+  pointer-events: auto;
+}
+
+.screen-icon-btn {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.screen-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.75);
+  transform: scale(1.08);
+}
+
+.screen-progress-container {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.screen-progress-bar {
+  height: 100%;
+  background: #FFFFFF;
+  transition: width 0.1s linear;
+}
+
+.theme-corporate .screen-progress-bar {
+  background: #34D399;
+}
+
+.theme-poetry .screen-progress-bar {
+  background: #C084FC;
+}
+
+/* ==============================================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================================== */
+
+@media (max-width: 1024px) {
+  .reels-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .iphone-mockup-wrapper {
+    width: 270px;
+    height: 546px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reels-section {
+    padding: 4.5rem 1.5rem 4rem 1.5rem;
+  }
+
+  .reels-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .reels-left-col {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .phone-nav-controls {
+    gap: 1.25rem;
+  }
+
+  .iphone-mockup-wrapper {
+    width: 260px;
+    height: 526px;
+  }
+
+  .nav-arrow-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-nav-controls {
+    gap: 0.75rem;
+  }
+
+  .iphone-mockup-wrapper {
+    width: 235px;
+    height: 475px;
+    border-radius: 38px;
+  }
+
+  .iphone-screen {
+    border-radius: 30px;
+  }
+
+  .nav-arrow-btn {
+    width: 38px;
+    height: 38px;
+  }
+}

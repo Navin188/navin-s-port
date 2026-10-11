@@ -6,6 +6,7 @@ import CalculatedChaos from './CalculatedChaos';
 import Projects from './Projects';
 import TechnicalSkills from './TechnicalSkills';
 import NoteWall from './NoteWall';
+import ReelsSection from './ReelsSection';
 import Footer from './Footer';
 import SectionNavRail from './SectionNavRail';
 import useSmoothScroll from './useSmoothScroll';
@@ -54,7 +55,10 @@ export function App() {
       {/* 7. Interactive Note Wall */}
       <NoteWall />
 
-      {/* 8. The Footer */}
+      {/* 8. Dynamic Reels Section (Corporate & Fun / Poetry & Feelings) */}
+      <ReelsSection />
+
+      {/* 9. The Footer */}
       <Footer />
     </div>
   );

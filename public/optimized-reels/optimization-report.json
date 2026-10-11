@@ -1,0 +1,92 @@
+[
+  {
+    "category": "corporateand-fun",
+    "filename": "corporate-01.mp4",
+    "originalSizeMB": "3.77",
+    "optimizedSizeMB": "3.46",
+    "reductionPercent": "8.5%",
+    "duration": "12.44s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "corporateand-fun",
+    "filename": "corporate-02.mp4",
+    "originalSizeMB": "4.73",
+    "optimizedSizeMB": "4.51",
+    "reductionPercent": "4.8%",
+    "duration": "28.65s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "corporateand-fun",
+    "filename": "corporate-03.mp4",
+    "originalSizeMB": "4.84",
+    "optimizedSizeMB": "5.17",
+    "reductionPercent": "-6.8%",
+    "duration": "25.37s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "corporateand-fun",
+    "filename": "corporate-04.mp4",
+    "originalSizeMB": "3.74",
+    "optimizedSizeMB": "3.58",
+    "reductionPercent": "4.2%",
+    "duration": "18.71s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "corporateand-fun",
+    "filename": "corporate-05.mp4",
+    "originalSizeMB": "2.68",
+    "optimizedSizeMB": "4.07",
+    "reductionPercent": "-51.8%",
+    "duration": "43.84s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "poetryand-feeling",
+    "filename": "poetry-01.mp4",
+    "originalSizeMB": "2.06",
+    "optimizedSizeMB": "2.27",
+    "reductionPercent": "-10.4%",
+    "duration": "25.67s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "poetryand-feeling",
+    "filename": "poetry-02.mp4",
+    "originalSizeMB": "3.43",
+    "optimizedSizeMB": "4.46",
+    "reductionPercent": "-29.9%",
+    "duration": "69.64s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "poetryand-feeling",
+    "filename": "poetry-03.mp4",
+    "originalSizeMB": "1.47",
+    "optimizedSizeMB": "1.48",
+    "reductionPercent": "-0.4%",
+    "duration": "28.40s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "poetryand-feeling",
+    "filename": "poetry-04.mp4",
+    "originalSizeMB": "2.17",
+    "optimizedSizeMB": "2.74",
+    "reductionPercent": "-26.3%",
+    "duration": "39.70s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  },
+  {
+    "category": "poetryand-feeling",
+    "filename": "poetry-05.mp4",
+    "originalSizeMB": "2.02",
+    "optimizedSizeMB": "2.03",
+    "reductionPercent": "-0.7%",
+    "duration": "24.87s",
+    "status": "OPTIMIZED_AND_VERIFIED"
+  }
+]
