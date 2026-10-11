@@ -80,7 +80,7 @@
   border-radius: 12px;
   padding: 0.35rem;
   width: 100%;
-  max-width: 440px;
+  max-width: 560px;
   box-shadow: var(--shadow-card);
 }
 
@@ -93,6 +93,12 @@
   font-family: 'Inter', sans-serif !important;
   font-size: 0.85rem;
   outline: none;
+}
+
+.notewall-author-input {
+  max-width: 135px;
+  border-right: 1px solid var(--border-card);
+  font-weight: 600;
 }
 
 .notewall-input::placeholder {
@@ -179,17 +185,26 @@
 }
 
 .note-card-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: #0F172A;
-  margin-bottom: 0.5rem;
-  background: rgba(15, 23, 42, 0.1);
-  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.55rem;
+  background: rgba(15, 23, 42, 0.12);
+  padding: 0.22rem 0.55rem;
   border-radius: 6px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.note-card-badge span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .note-card-text {

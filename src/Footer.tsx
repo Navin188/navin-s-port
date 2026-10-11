@@ -86,7 +86,7 @@ export const Footer = ({
 
         {/* Bottom Bar */}
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Navin Patil. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Navin Boddhul. All rights reserved.</span>
           <span>UI Designer &amp; Frontend Architect at Shaurya Technosoft</span>
         </div>
       </div>

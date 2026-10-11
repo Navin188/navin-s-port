@@ -55,8 +55,8 @@ export const createStickyNoteInDB = async (
     const localNote: StickyNoteRecord = {
       id: `local-${Date.now()}`,
       message: trimmedMsg,
-      author_name: note.author_name || 'Visitor',
-      badge: note.badge || 'COMMUNITY NOTE',
+      author_name: note.author_name || 'Anonymous',
+      badge: note.badge || note.author_name || 'Anonymous',
       color_class: note.color_class || 'note-card-yellow',
       top: note.top || '100px',
       left: note.left || '100px',
@@ -67,10 +67,11 @@ export const createStickyNoteInDB = async (
   }
 
   try {
+    const fallbackName = (note.author_name || 'Anonymous').trim().substring(0, 50);
     const payload = {
       message: trimmedMsg,
-      author_name: (note.author_name || 'Visitor').trim().substring(0, 50),
-      badge: note.badge || 'COMMUNITY NOTE',
+      author_name: fallbackName,
+      badge: (note.badge || fallbackName).trim().substring(0, 50),
       color_class: note.color_class || 'note-card-yellow',
       top: note.top || '100px',
       left: note.left || '100px',

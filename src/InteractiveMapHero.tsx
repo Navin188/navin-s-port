@@ -50,7 +50,7 @@ const HOTSPOTS: HotspotData[] = [
     topPct: 72,
     leftPct: 50,
     chapter: 'THE CREATOR',
-    title: 'Navin Patil',
+    title: 'Navin Boddhul',
     role: 'UI Designer turned Frontend Developer',
     description: 'Obsessed with fluid micro-interactions, GSAP scroll animations, and building state-of-the-art web products that wow visitors and deliver flawless UX.',
     metrics: [
@@ -222,7 +222,7 @@ export function InteractiveMapHero() {
             {/* Custom Avatar for 'Navin' vs Dot for standard hotspots */}
             {spot.isAvatar ? (
               <div className="hotspot-avatar-container">
-                <img src={myImage} alt="Navin Patil" className="hotspot-avatar-img" />
+                <img src={myImage} alt="Navin Boddhul" className="hotspot-avatar-img" />
               </div>
             ) : (
               <div className="hotspot-dot-container">

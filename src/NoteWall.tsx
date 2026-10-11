@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Plus, Move, MessageSquare } from 'lucide-react';
+import { Plus, Move, MessageSquare, User } from 'lucide-react';
 import {
   fetchStickyNotesFromDB,
   createStickyNoteInDB,
@@ -53,6 +53,7 @@ export const NoteWall = () => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [notes, setNotes] = useState<StickyNoteItem[]>([]);
+  const [inputAuthor, setInputAuthor] = useState('');
   const [inputText, setInputText] = useState('');
   const [submittingNote, setSubmittingNote] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -64,9 +65,17 @@ export const NoteWall = () => {
       if (!error && data && data.length > 0) {
         const formatted: StickyNoteItem[] = data.map((item, i) => {
           const coords = getSlotCoordinates(i);
+          // Show the person's real name on the note badge instead of "COMMUNITY NOTE"
+          let authorName = 'Anonymous';
+          if (item.author_name && item.author_name.trim() && item.author_name.trim().toLowerCase() !== 'visitor') {
+            authorName = item.author_name.trim();
+          } else if (item.badge && item.badge.trim() && item.badge.trim().toUpperCase() !== 'COMMUNITY NOTE') {
+            authorName = item.badge.trim();
+          }
+
           return {
             id: item.id || `db-note-${i}`,
-            badge: item.badge || 'COMMUNITY NOTE',
+            badge: authorName,
             text: item.message,
             top: coords.top,
             left: coords.left,
@@ -136,11 +145,14 @@ export const NoteWall = () => {
     const coords = getSlotCoordinates(nextIndex);
     const color = colorPaletteClasses[nextIndex % colorPaletteClasses.length];
     const textToInsert = inputText.trim();
+    const authorNameClean = inputAuthor.trim();
+    const authorToInsert = authorNameClean || 'Anonymous';
+    const displayBadge = authorNameClean || 'Anonymous';
 
     const { data, error } = await createStickyNoteInDB({
       message: textToInsert,
-      author_name: 'Visitor',
-      badge: 'COMMUNITY NOTE',
+      author_name: authorToInsert,
+      badge: displayBadge,
       color_class: color,
       top: coords.top,
       left: coords.left,
@@ -156,7 +168,7 @@ export const NoteWall = () => {
 
     const newNote: StickyNoteItem = {
       id: data?.id || `user-note-${Date.now()}`,
-      badge: data?.badge || 'COMMUNITY NOTE',
+      badge: displayBadge,
       text: textToInsert,
       top: coords.top,
       left: coords.left,
@@ -166,6 +178,7 @@ export const NoteWall = () => {
 
     setNotes((prev) => [...prev, newNote]);
     setInputText('');
+    setInputAuthor('');
 
     setTimeout(() => {
       const lastIndex = notes.length;
@@ -196,11 +209,21 @@ export const NoteWall = () => {
         <form onSubmit={handleAddNote} className="notewall-form">
           <input
             type="text"
+            className="notewall-input notewall-author-input"
+            placeholder="Your name"
+            maxLength={30}
+            value={inputAuthor}
+            onChange={(e) => setInputAuthor(e.target.value)}
+            required
+          />
+          <input
+            type="text"
             className="notewall-input"
             placeholder="Write a custom note..."
             maxLength={280}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
+            required
           />
           <button type="submit" className="notewall-submit-btn" disabled={submittingNote}>
             <Plus size={16} />
@@ -244,7 +267,10 @@ export const NoteWall = () => {
               transform: `rotate(${note.rotate}deg)`,
             }}
           >
-            <div className="note-card-badge">{note.badge}</div>
+            <div className="note-card-badge">
+              <User size={11} style={{ opacity: 0.75, flexShrink: 0 }} />
+              <span>{note.badge}</span>
+            </div>
             <div className="note-card-text">{note.text}</div>
           </div>
         ))}

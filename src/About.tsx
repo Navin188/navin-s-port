@@ -174,7 +174,7 @@ export const About = () => {
               <div className="profile-image-frame">
                 <img
                   src={myImage}
-                  alt="Navin Patil"
+                  alt="Navin Boddhul"
                   className="profile-image"
                   draggable={false}
                   onError={(e) => {
