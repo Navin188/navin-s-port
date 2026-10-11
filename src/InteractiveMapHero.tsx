@@ -94,29 +94,46 @@ export function InteractiveMapHero() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const aspectContainerRef = useRef<HTMLDivElement>(null);
 
-  // Audio control
-  const audioCtxRef = useRef<AudioContext | null>(null);
+  // Background audio control (/bgmusic.mp3)
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio('/bgmusic.mp3');
+    audio.loop = true;
+    audio.volume = 0.35;
+    audioRef.current = audio;
+
+    // Auto-replay fallback in case loop property fails in any browser
+    const handleEnded = () => {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    };
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+    };
+  }, []);
+
   const toggleSound = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/bgmusic.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.35;
+    }
+
     if (!isPlaying) {
-      try {
-        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-        audioCtxRef.current = ctx;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(220, ctx.currentTime);
-        gain.gain.setValueAtTime(0.04, ctx.currentTime);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(true);
-      }
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          console.warn('Background audio playback prevented:', err);
+        });
     } else {
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close();
-      }
+      audioRef.current.pause();
       setIsPlaying(false);
     }
   };
