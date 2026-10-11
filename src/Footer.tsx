@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, FileText, ArrowUpRight } from 'lucide-react';
+import resumeFile from './assets/NavinBoddhul.pdf';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,9 +14,9 @@ export interface FooterProps {
 }
 
 export const Footer = ({
-  email = 'hello@navin.dev',
-  linkedinUrl = 'https://linkedin.com/in/navinpatil',
-  resumeUrl = '/Resume_Navin_Patil.pdf',
+  email = 'boddhulnavin@gmail.com',
+  linkedinUrl = 'https://www.linkedin.com/in/navin-boddhul/',
+  resumeUrl = resumeFile,
 }: FooterProps) => {
   const footerRef = useRef<HTMLElement>(null);
 
@@ -71,7 +72,9 @@ export const Footer = ({
 
             <a
               href={resumeUrl}
-              download="Resume_Navin_Patil.pdf"
+              download="Navin_Boddhul_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="footer-link-btn"
             >
               <FileText size={16} color="var(--accent-blue)" />
