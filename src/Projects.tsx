@@ -181,9 +181,14 @@ export const Projects = () => {
     <section className="cinematic-projects-section" ref={sectionRef} id="projects">
       <div className="cinematic-progress-bar" ref={progressBarRef} />
 
-      {/* Standard Header Flow (NO OVERLAP!) */}
+      {/* Standard Header Flow */}
       <div className="cinematic-header-flow">
-        <h2 className="cinematic-title">Projects</h2>
+        <h2 className="cinematic-title">
+          Featured <span>Projects</span>
+        </h2>
+        <p className="cinematic-subtitle">
+          Selected client works, production applications, and interactive experiments.
+        </p>
       </div>
 
       {/* Horizontal Track holding 4 resume project cards */}

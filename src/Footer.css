@@ -54,20 +54,30 @@
   width: fit-content;
 }
 
-/* Title with 40% Decreased Font Size */
+/* Standardized Title Typography */
 .footer-large-title {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(2.2rem, 4.5vw, 4.5rem); /* 40% smaller title size */
-  font-weight: 900;
-  line-height: 0.95;
-  text-transform: uppercase;
-  margin: 0;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: none;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
   color: var(--text-primary);
 }
 
 .footer-large-title span {
   color: var(--accent-primary);
+}
+
+.footer-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 500px;
 }
 
 /* Links Grid */

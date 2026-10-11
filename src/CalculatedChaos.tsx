@@ -236,11 +236,11 @@ export function CalculatedChaos() {
     <section className="chaos-section" id="chaos-section" ref={sectionRef}>
       <div className="chaos-header">
         <h2 className="chaos-title">
-          Calculated <span>chaos.</span>
+          Calculated <span>Chaos</span>
         </h2>
-        <p className="chaos-subtitle">
+        {/* <p className="chaos-subtitle">
           24. Based in India. When I'm not building interfaces in React & GSAP, I'm usually exploring photography & music.
-        </p>
+        </p> */}
       </div>
 
       <div className="chaos-board-container" onPointerMove={handlePointerMove}>

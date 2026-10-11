@@ -188,7 +188,9 @@ export const ReelsSection: React.FC = () => {
       <div className="reels-container">
         {/* Left Column: Context, Category Switcher & Reel Description */}
         <div className="reels-left-col">
-          <h2 className="reels-heading">Corporate by Day. Poet by Scroll.</h2>
+          <h2 className="reels-heading">
+            Corporate by Day, <span>Poet by Scroll</span>
+          </h2>
 
           <div className="reels-copy">
             <p className="reels-lead">

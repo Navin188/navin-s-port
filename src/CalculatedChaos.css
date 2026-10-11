@@ -42,17 +42,18 @@
 
 .chaos-title {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(1.8rem, 3.2vw, 3.2rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-weight: 800;
+  line-height: 1.2;
   color: var(--text-primary);
   margin: 0 0 0.5rem 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
 .chaos-title span {
-  background: linear-gradient(135deg, #FF7E5F, #FEB47B);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent-primary);
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
 .chaos-subtitle {

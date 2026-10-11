@@ -49,11 +49,25 @@
 
 .cinematic-title {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-weight: 800;
+  line-height: 1.2;
   color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.cinematic-title span {
+  color: var(--accent-primary);
+}
+
+.cinematic-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-secondary);
   margin: 0;
-  letter-spacing: -0.02em;
 }
 
 /* Horizontal Track: Card 1 center = 50vw at start, Card 4 center = 50vw at end */

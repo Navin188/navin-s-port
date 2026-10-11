@@ -43,12 +43,12 @@
 /* Simple Title with 40% Decreased Font Size */
 .journey-title {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(1.6rem, 2.6vw, 2.6rem); /* 40% smaller title font size */
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--text-primary);
   margin: 0 0 0.5rem 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .journey-title span {

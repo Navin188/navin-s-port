@@ -199,7 +199,10 @@ export const NoteWall = () => {
       {/* Top Bar */}
       <div className="notewall-header">
         <div className="notewall-title-box">
-          <h2 className="notewall-heading">Stickyboard</h2>
+          <h2 className="notewall-heading">
+            Interactive <span>Stickyboard</span>
+          </h2>
+
         </div>
 
         <form onSubmit={handleAddNote} className="notewall-form">
@@ -228,7 +231,7 @@ export const NoteWall = () => {
         </form>
 
         {/* Visible State Counter */}
-        <div className="notewall-count-badge">Total Notes: {notes.length}</div>
+        {/* <div className="notewall-count-badge">Total Notes: {notes.length}</div> */}
       </div>
 
       {errorMsg && (

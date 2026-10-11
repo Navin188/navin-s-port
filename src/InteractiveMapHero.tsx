@@ -67,10 +67,10 @@ const HOTSPOTS: HotspotData[] = [
   {
     id: 'shaurya',
     label: 'Shaurya Technosoft',
-    year: '2021-PRESENT',
+    year: '2022-PRESENT',
     topPct: 38,
     leftPct: 87,
-    chapter: 'CHAPTER 02 · FEB 2021 - PRESENT',
+    chapter: 'CHAPTER 02 · 2022 - PRESENT',
     title: 'Shaurya Technosoft',
     role: 'Frontend Developer (4+ Years Exp)',
     description: 'Spearheaded enterprise frontend architectures, transforming Figma wireframes into dynamic, high-performance, and API-driven web applications using React, TypeScript, Tailwind, and GSAP.',
@@ -173,9 +173,9 @@ export function InteractiveMapHero() {
         <h1 className="map-overlay-title">
           Navin's <span>World</span>
         </h1>
-        <p className="map-overlay-subtitle">
+        {/* <p className="map-overlay-subtitle">
           Tech City Overworld • Click Hotspots to Inspect • Scroll to Fly In
-        </p>
+        </p> */}
       </div>
 
       {/* 2. Top Right Controls */}

@@ -43,8 +43,11 @@ export const Footer = ({
         <div className="footer-main">
           <div className="footer-title-box">
             <h2 className="footer-large-title">
-              Let's <span>Connect.</span>
+              Let's <span>Connect</span>
             </h2>
+            <p className="footer-subtitle">
+              Open for frontend development roles, design collaborations, and creative discussions.
+            </p>
           </div>
 
           {/* Clean Layout Links */}

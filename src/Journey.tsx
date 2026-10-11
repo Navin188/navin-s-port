@@ -112,10 +112,10 @@ export const Journey = () => {
       {/* Header */}
       <div className="journey-header">
         <h2 className="journey-title">
-          <span>Journey</span>
+          Career <span>Journey</span>
         </h2>
         <p className="journey-subtitle">
-          Four major milestones from 2016 to now.
+          Four major milestones from 2021 to now.
         </p>
       </div>
 
@@ -218,7 +218,7 @@ export const Journey = () => {
               ))}
             </div>
 
-            <div className="stepper-range-text">2016 → now</div>
+            <div className="stepper-range-text">2022 → now</div>
           </div>
         </div>
       </div>

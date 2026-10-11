@@ -52,14 +52,28 @@
   width: fit-content;
 }
 
-/* Simple Title with 40% Decreased Font Size */
+/* Standardized Title Typography */
 .notewall-heading {
   font-family: 'Inter', sans-serif !important;
-  font-size: clamp(1.5rem, 2.4vw, 2.4rem);
-  /* 40% smaller title size */
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-weight: 800;
-  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.5rem 0;
   color: var(--text-primary);
+}
+
+.notewall-heading span {
+  color: var(--accent-primary);
+}
+
+.notewall-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .notewall-count-badge {

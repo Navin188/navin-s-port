@@ -46,20 +46,21 @@
 }
 
 .ts-title {
-  font-family: var(--font-family);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-family: 'Inter', sans-serif !important;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
   color: var(--text-primary);
-  margin: 0;
+  margin: 0 0 0.5rem 0;
 }
 
-.ts-title-accent {
-  background: linear-gradient(130deg, var(--accent-primary) 0%, #00D4FF 55%, #7C3AED 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.ts-title-accent,
+.ts-title span {
+  color: var(--accent-primary);
+  background: none;
+  -webkit-text-fill-color: initial;
+  background-clip: unset;
   display: inline-block;
   position: relative;
 }
