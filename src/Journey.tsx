@@ -1,227 +1,360 @@
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GraduationCap, Palette, Code2, Award } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Check,
+  Briefcase,
+  GraduationCap,
+  Sparkles,
+  ExternalLink,
+} from 'lucide-react';
 import './Journey.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
-export interface MapStopItem {
-  id: string;
-  stepCount: string;
-  year: string;
-  pinLabel: string;
-  companyName: string;
-  heading: string;
-  description: string;
-  xPercent: number;
-  yPercent: number;
-  icon: React.ReactNode;
+interface JourneyMilestone {
+  id: number;
+  stepStr: string;
+  title: string;
+  subtitle: string;
+  period: string;
+  details: string;
   tags: string[];
+  accentColor: string;
+  icon: React.ReactNode;
 }
 
-const mapStops: MapStopItem[] = [
+const JOURNEY_ITEMS: JourneyMilestone[] = [
   {
-    id: 'stop-1',
-    stepCount: '01 / 04',
-    year: '2022 – 2025',
-    pinLabel: 'Academic',
-    companyName: 'Electronics & Telecommunication',
-    heading: 'B.Tech in Electronics & Telecommunication',
-    description:
-      'Graduated with a degree in Electronics and Telecommunication Engineering. Built a strong foundation in Electronics and Telecommunication at Bharatratna Indira Gandhi College of Engineering.',
-    xPercent: 18,
-    yPercent: 70,
+    id: 1,
+    stepStr: '01 / 04',
+    title: 'Academy',
+    subtitle: 'BIGCE',
+    period: '2016 – 2020',
+    details:
+      'Completed Diploma and Engineering degree, laying the foundation for UI development.',
+    tags: ['Diploma', 'Engineering Degree', 'Algorithmic Thinking', 'Core CS'],
+    accentColor: '#F59E0B',
     icon: <GraduationCap size={18} />,
-    tags: ['Electronics & Telecommunication'],
   },
   {
-    id: 'stop-2',
-    stepCount: '02 / 04',
-    year: '2021 – 2022',
-    pinLabel: 'UI Design',
-    companyName: 'Figma & Web Design at Vertex Technosys',
-    heading: 'The Beginning: UI Designer (Wireframes & Pixel Perfection)',
-    description:
-      'Crafted high-fidelity Figma wireframes, design tokens, and interactive component libraries. Focused heavily on visual hierarchy, typographic precision, and user conversion psychology.',
-    xPercent: 38,
-    yPercent: 28,
-    icon: <Palette size={18} />,
-    tags: ['Figma', 'Wireframing', 'Web Design', 'Pixel Perfection'],
+    id: 2,
+    stepStr: '02 / 04',
+    title: 'UI Designer',
+    subtitle: 'Vertex',
+    period: '2021 – 2022',
+    details:
+      'Started career focusing on wireframing and pixel-perfect UI design.',
+    tags: ['Figma', 'Wireframing', 'Visual Hierarchy', 'Pixel Perfection'],
+    accentColor: '#38BDF8',
+    icon: <Sparkles size={18} />,
   },
   {
-    id: 'stop-3',
-    stepCount: '03 / 04',
-    year: '2022 – 2024',
-    pinLabel: 'Shaurya Technosoft Pvt Ltd as a UI Designer',
-    companyName: 'Shaurya Technosoft',
-    heading: 'UI Designer at Shaurya Technosoft (2 Years)',
-    description:
-      'My responsibilities during this period included creating wireframes and converting them into pixel-perfect designs for various screen sizes. I designed over 20 web applications and websites during this time.',
-    xPercent: 62,
-    yPercent: 72,
-    icon: <Code2 size={18} />,
-    tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Tailwind CSS', 'Angular'],
+    id: 3,
+    stepStr: '03 / 04',
+    title: 'UI Designer',
+    subtitle: 'Shaurya Technosoft',
+    period: '2022 – 2024',
+    details:
+      'Designed over 10 complex websites and admin panels, prioritizing user experience.',
+    tags: ['Web Applications', 'Admin Dashboards', 'Design Tokens', 'User Experience'],
+    accentColor: '#F43F5E',
+    icon: <Briefcase size={18} />,
   },
   {
-    id: 'stop-4',
-    stepCount: '04 / 04',
-    year: '2026 - present',
-    pinLabel: 'Frontend Developer',
-    companyName: 'Shaurya Technosoft',
-    heading: 'Frontend Developer at Shaurya Technosoft',
-    description:
-      'Throughout this journey, I have learned a lot and transformed my workflow. Previously, I focused on converting wireframes into web pages and screens. Now, bringing those designs to life by making them dynamic and interactive has sparked even greater interest in my work. I genuinely enjoy my work and responsibilities.',
-    xPercent: 84,
-    yPercent: 26,
-    icon: <Award size={18} />,
-    tags: ['React', 'Redux Toolkit', 'UI Design', 'Figma'],
+    id: 4,
+    stepStr: '04 / 04',
+    title: 'Frontend Developer',
+    subtitle: 'Shaurya Technosoft',
+    period: '2024 – Present',
+    details:
+      'Transitioned to development (4+ years). Converting wireframes into dynamic React screens and binding REST APIs. Won 2nd place in Rentloop Hackathon.',
+    tags: ['React', 'TypeScript', 'REST APIs', 'Rentloop Hackathon Winner', 'Dynamic UI'],
+    accentColor: '#10B981',
+    icon: <Briefcase size={18} />,
   },
 ];
 
 export const Journey = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeModalId, setActiveModalId] = useState<number | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
+  // Close modal on Escape key
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (sectionRef.current) {
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: 'top 50%',
-          end: 'bottom 70%',
-          scrub: true,
-          onUpdate: (self) => {
-            const idx = Math.min(
-              Math.floor(self.progress * mapStops.length),
-              mapStops.length - 1
-            );
-            setActiveIndex(idx);
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveModalId(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const activeStop = mapStops[activeIndex];
+  const activeMilestone =
+    JOURNEY_ITEMS.find((item) => item.id === activeModalId) || null;
+
+  const handlePrevMilestone = () => {
+    if (!activeModalId) return;
+    const currentIndex = JOURNEY_ITEMS.findIndex((item) => item.id === activeModalId);
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : JOURNEY_ITEMS.length - 1;
+    setActiveModalId(JOURNEY_ITEMS[prevIndex].id);
+  };
+
+  const handleNextMilestone = () => {
+    if (!activeModalId) return;
+    const currentIndex = JOURNEY_ITEMS.findIndex((item) => item.id === activeModalId);
+    const nextIndex = currentIndex < JOURNEY_ITEMS.length - 1 ? currentIndex + 1 : 0;
+    setActiveModalId(JOURNEY_ITEMS[nextIndex].id);
+  };
+
+  const handleCopyDetails = () => {
+    if (!activeMilestone) return;
+    const copyText = `[${activeMilestone.stepStr}] ${activeMilestone.title} at ${activeMilestone.subtitle} (${activeMilestone.period})\n\n${activeMilestone.details}\n\nKey Focus: ${activeMilestone.tags.join(', ')}`;
+    navigator.clipboard.writeText(copyText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <section className="journey-section" ref={sectionRef} id="journey-section">
-      {/* Header */}
+    <section className="journey-section" id="journey-section">
+      {/* Background ambient spotlight */}
+      <div className="journey-bg-ambient" />
+
+      {/* Section Header */}
       <div className="journey-header">
         <h2 className="journey-title">
           Career <span>Journey</span>
         </h2>
         <p className="journey-subtitle">
-          Four major milestones from 2021 to now.
+          Real milestones from education to full-stack engineering. Pick a card from the box.
         </p>
       </div>
 
-      {/* Side-by-Side Grid (Details Card Left, Map Canvas Right) */}
-      <div className="journey-side-grid">
-        {/* Left Column: Active Milestone Details Card */}
-        <div className="journey-details-card">
-          <div>
-            <div className="card-header-bar">
-              <div className="card-company-badge">
-                <div className="card-icon-box">{activeStop.icon}</div>
-                <div>
-                  <div className="card-company-name">{activeStop.companyName}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'Inter' }}>
-                    {activeStop.year}
-                  </div>
-                </div>
-              </div>
+      {/* 3D Isometric Open Storage Box Container (Matching jameschugh.com) */}
+      <div className="box-stage-container">
+        <div className="box-fit">
+          <div className="box3">
+            {/* Box Shadow */}
+            <div className="box-shadow" />
 
-              <span className="card-step-count">{activeStop.stepCount}</span>
+            {/* Box Floor */}
+            <div className="box-floor" />
+
+            {/* Inner Back Wall */}
+            <div className="f wall-i wall-back" />
+
+            {/* Inner Left Wall */}
+            <div className="f wall-i wall-left" />
+
+            {/* Open Lid Hinged at the Back */}
+            <div className="f box-lid">
+              <div className="lid-stitch" />
+              <div className="stamp2">ARCHIVES · 2016 – 2026</div>
             </div>
 
-            <h3 className="card-heading-title" style={{ marginTop: '1rem' }}>
-              {activeStop.heading}
-            </h3>
-            <p className="card-body-text" style={{ marginTop: '0.65rem' }}>
-              {activeStop.description}
-            </p>
-          </div>
-
-          <div className="card-tags-container">
-            {activeStop.tags.map((t) => (
-              <span key={t} className="card-tag-item">
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Column: Google Map Canvas & Stepper Bar */}
-        <div className="journey-right-column">
-          <div className="map-canvas-wrapper">
-            <div className="map-vector-bg" />
-            <div className="map-river-shape" />
-
-            {/* SVG S-Curve Travel Route Path */}
-            <svg className="map-route-svg" viewBox="0 0 760 380" preserveAspectRatio="none">
-              <path
-                d="M 136,266 C 215,106 288,106 288,106 C 288,106 370,273 471,273 C 570,273 570,98 638,98"
-                fill="none"
-                stroke="var(--accent-primary)"
-                strokeWidth="4"
-              />
-            </svg>
-
-            {/* Glowing Route Travel Cursor */}
-            <div
-              className="route-travel-cursor"
-              style={{
-                left: `${activeStop.xPercent}%`,
-                top: `${activeStop.yPercent}%`,
-              }}
-            />
-
-            {/* 4 Map Pin Markers */}
-            {mapStops.map((stop, index) => {
-              const alignClass =
-                stop.xPercent > 70
-                  ? 'pin-align-right'
-                  : stop.xPercent < 25
-                    ? 'pin-align-left'
-                    : 'pin-align-center';
+            {/* 4 Standing Cards inside the Box Cavity */}
+            {JOURNEY_ITEMS.map((item, index) => {
+              const xPos = 108 + index * 148;
+              const leftPos = xPos - 112; // x - CW / 2 (CW = 224)
+              const topPos = 130 - 304;   // BD / 2 - CH (BD = 260, CH = 304)
+              const isHovered = hoveredCardId === item.id;
 
               return (
-                <div
-                  key={stop.id}
-                  className={`map-pin-marker ${alignClass} ${index === activeIndex ? 'is-active' : ''}`}
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveModalId(item.id)}
+                  onMouseEnter={() => setHoveredCardId(item.id)}
+                  onMouseLeave={() => setHoveredCardId(null)}
+                  onFocus={() => setHoveredCardId(item.id)}
+                  onBlur={() => setHoveredCardId(null)}
+                  className={`f box-card-3d ${isHovered ? 'is-hovered' : ''}`}
                   style={{
-                    left: `${stop.xPercent}%`,
-                    top: `${stop.yPercent}%`,
-                  }}
-                  onClick={() => setActiveIndex(index)}
+                    left: `${leftPos}px`,
+                    top: `${topPos}px`,
+                    '--card-accent': item.accentColor,
+                  } as React.CSSProperties}
+                  aria-label={`${item.title} at ${item.subtitle}, open milestone details`}
                 >
-                  <div className="pin-bubble">{stop.icon}</div>
-                  <div className="pin-label-pill">{stop.pinLabel}</div>
-                </div>
+                  {/* Glowing Top Flap Accent Line */}
+                  <div
+                    className="card-3d-top-glow"
+                    style={{ background: item.accentColor }}
+                  />
+
+                  {/* Card Top Row: Icon & Step Tag */}
+                  <div className="card-3d-header">
+                    <div
+                      className="card-3d-icon"
+                      style={{ color: item.accentColor }}
+                    >
+                      {item.icon}
+                    </div>
+                    <span className="card-3d-tag">{item.stepStr}</span>
+                  </div>
+
+                  {/* Card Body: Title & Subtitle */}
+                  <div className="card-3d-body">
+                    <h3 className="card-3d-title">{item.title}</h3>
+                    <div className="card-3d-subtitle">@{item.subtitle}</div>
+                  </div>
+
+                  {/* Card Footer: Period & Click Hint */}
+                  <div className="card-3d-footer">
+                    <span className="card-3d-period">{item.period}</span>
+                    <span
+                      className="card-3d-cta"
+                      style={{ color: item.accentColor }}
+                    >
+                      Open ↗
+                    </span>
+                  </div>
+                </button>
               );
             })}
-          </div>
 
-          {/* Stepper Bar Underneath Map */}
-          <div className="map-stepper-bar">
-            <div className="stepper-dots-row">
-              {mapStops.map((stop, index) => (
-                <div
-                  key={`dot-${stop.id}`}
-                  className={`stepper-dot-item ${index === activeIndex ? 'is-active' : ''}`}
-                  onClick={() => setActiveIndex(index)}
-                />
-              ))}
+            {/* Outer Right Wall */}
+            <div className="f wall-o wall-right" />
+
+            {/* Outer Front Wall with Embossed Text */}
+            <div className="f wall-o wall-front">
+              <span className="brand">Things I achieved</span>
             </div>
-
-            <div className="stepper-range-text">2022 → now</div>
           </div>
         </div>
       </div>
+
+      {/* ─── POPUP / MODAL DIALOG (When User Clicks a Card) ─── */}
+      {activeMilestone && (
+        <div
+          className="journey-modal-backdrop"
+          onClick={() => setActiveModalId(null)}
+        >
+          <div
+            className="journey-modal-dialog"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            {/* Modal Top Bar */}
+            <div className="modal-top-bar">
+              <div className="modal-nav-arrows">
+                <button
+                  onClick={handlePrevMilestone}
+                  className="modal-arrow-btn"
+                  title="Previous milestone"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <span className="modal-step-counter">
+                  {activeMilestone.stepStr}
+                </span>
+                <button
+                  onClick={handleNextMilestone}
+                  className="modal-arrow-btn"
+                  title="Next milestone"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+
+              <div
+                className="modal-chapter-chip"
+                style={{
+                  borderColor: activeMilestone.accentColor,
+                  color: activeMilestone.accentColor,
+                }}
+              >
+                <span>●</span> CHAPTER 0{activeMilestone.id}
+              </div>
+
+              <button
+                onClick={() => setActiveModalId(null)}
+                className="modal-close-btn"
+                title="Close popup"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Heading */}
+            <div className="modal-heading-group">
+              <h3 className="modal-main-title">
+                {activeMilestone.title}{' '}
+                <span style={{ color: activeMilestone.accentColor }}>
+                  @{activeMilestone.subtitle}
+                </span>
+              </h3>
+              <p className="modal-subtitle-text">
+                Verified Career Milestone · {activeMilestone.period}
+              </p>
+            </div>
+
+            {/* Structured Info Rows */}
+            <div className="modal-meta-table">
+              <div className="meta-row">
+                <span className="meta-label">Organization</span>
+                <span className="meta-val highlight">
+                  {activeMilestone.subtitle}
+                </span>
+              </div>
+              <div className="meta-row">
+                <span className="meta-label">Timeline</span>
+                <span className="meta-val">{activeMilestone.period}</span>
+              </div>
+              <div className="meta-row">
+                <span className="meta-label">Role Focus</span>
+                <span className="meta-val">{activeMilestone.title}</span>
+              </div>
+            </div>
+
+            {/* Milestone Story Details */}
+            <div className="modal-details-box">
+              <p className="modal-story-paragraph">
+                {activeMilestone.details}
+              </p>
+            </div>
+
+            {/* Competency Tags */}
+            <div className="modal-tags-section">
+              <span className="tags-header">Key Highlights & Competencies:</span>
+              <div className="modal-tags-list">
+                {activeMilestone.tags.map((tag) => (
+                  <span key={tag} className="modal-tag-chip">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="modal-footer-bar">
+              <button
+                onClick={handleCopyDetails}
+                className={`modal-copy-btn ${copied ? 'is-copied' : ''}`}
+              >
+                {copied ? (
+                  <>
+                    <Check size={16} /> Copied Details!
+                  </>
+                ) : (
+                  <>
+                    <Copy size={16} /> Copy Details
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={handleNextMilestone}
+                className="modal-next-btn"
+                style={{ background: activeMilestone.accentColor }}
+              >
+                <span>Next Milestone</span>
+                <ExternalLink size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

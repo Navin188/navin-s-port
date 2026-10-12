@@ -2,14 +2,14 @@
 .chaos-section {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  min-height: auto;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(3.5rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
+  padding: calc(3.5rem + 10px) clamp(1rem, 4vw, 2.5rem);
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;

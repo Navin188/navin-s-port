@@ -1,14 +1,14 @@
-/* About.css - Full 100vh Section, 40% Decreased Titles, Inter Font, & Overlapping Draggable Cards Stack */
+/* About.css - Standardized Spacing, 40% Decreased Titles, Inter Font, & Overlapping Draggable Cards Stack */
 .about-section {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  min-height: auto;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5rem 4rem;
+  padding: calc(3.5rem + 10px) clamp(1rem, 4vw, 2.5rem);
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -23,7 +23,7 @@
   transform: translate(-50%, -50%);
   width: 800px;
   height: 500px;
-  background: 
+  background:
     radial-gradient(circle at 30% 40%, var(--accent-glow) 0%, transparent 60%),
     radial-gradient(circle at 70% 60%, rgba(37, 99, 235, 0.05) 0%, transparent 60%);
   pointer-events: none;
@@ -275,10 +275,12 @@
   .about-section {
     padding: clamp(3.5rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
   }
+
   .about-split-container {
     grid-template-columns: 1fr;
     gap: 2.75rem;
   }
+
   .about-right {
     height: 440px;
   }
@@ -288,43 +290,53 @@
   .about-section {
     padding: 2.75rem 1rem;
   }
+
   .about-stats-row {
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
   }
+
   .stat-card {
     padding: 0.65rem 0.45rem;
     align-items: center;
     text-align: center;
   }
+
   .stat-value {
     font-size: 1.15rem;
   }
+
   .stat-title {
     font-size: 0.65rem;
   }
+
   .cards-stack-wrapper {
     width: min(340px, calc(100vw - 2.5rem));
     height: 390px;
   }
+
   .drag-profile-card {
     width: min(300px, calc(100vw - 3rem));
   }
 }
 
 @media (max-width: 360px) {
+
   /* Foldable outer screens (280px - 320px) */
   .about-section {
     padding: 2.25rem 0.75rem;
   }
+
   .about-stats-row {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
+
   .cards-stack-wrapper {
     width: 260px;
     height: 350px;
   }
+
   .drag-profile-card {
     width: 250px;
     padding: 0.75rem;

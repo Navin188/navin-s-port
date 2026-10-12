@@ -2,15 +2,15 @@
 .cinematic-projects-section {
   position: relative;
   width: 100vw;
+  height: 100vh;
   min-height: 100vh;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  padding-top: clamp(3rem, 5vw, 4.5rem);
-  padding-bottom: 2rem;
+  justify-content: center;
+  padding: 0;
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -27,7 +27,7 @@
   position: relative;
   z-index: 20;
   text-align: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   pointer-events: none;
 }
 
@@ -75,7 +75,7 @@
 .cinematic-track {
   display: flex;
   align-items: center;
-  height: 68vh;
+  height: auto;
   padding-left: calc(50vw - min(70vw, 860px) / 2 - 1.25rem);
   padding-right: calc(50vw - min(70vw, 860px) / 2 - 1.25rem);
   box-sizing: content-box;

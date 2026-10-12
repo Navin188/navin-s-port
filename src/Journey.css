@@ -1,14 +1,16 @@
-/* Journey.css - 40% Decreased Title Size, Inter Font, Simple Title, & Light Theme */
+/* Journey.css — Authentic 3D Open Storage Box & Standing Cards Timeline */
+
 .journey-section {
   position: relative;
   width: 100vw;
-  min-height: 90vh;
+  min-height: auto;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3.5rem 4rem 4.5rem 4rem; /* Reduced unwanted vertical spacing */
+  justify-content: flex-start;
+  padding: calc(3.5rem + 10px) clamp(1rem, 4vw, 2.5rem);
   box-sizing: border-box;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -16,31 +18,27 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.journey-bg-ambient {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 850px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+/* Header */
 .journey-header {
   text-align: center;
-  z-index: 10;
+  margin-bottom: 1.25rem;
   max-width: 800px;
-  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 20;
 }
 
-.journey-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 9999px;
-  color: var(--accent-primary);
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-/* Simple Title with 40% Decreased Font Size */
 .journey-title {
   font-family: 'Inter', sans-serif !important;
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
@@ -52,362 +50,710 @@
 }
 
 .journey-title span {
-  color: var(--accent-primary);
+  color: #10B981;
 }
 
 .journey-subtitle {
   font-family: 'Inter', sans-serif !important;
   font-size: 0.95rem;
   color: var(--text-secondary);
-  margin: 0;
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 680px;
 }
 
-/* Side-by-Side Grid Layout */
-.journey-side-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+/* ─── 3D ISOMETRIC STORAGE BOX (Exact James Chugh Math & Geometry - Reduced 40%) ─── */
+.box-stage-container {
   width: 100%;
-  max-width: 1280px;
-  gap: 3rem;
-  z-index: 10;
-}
-
-/* Details Card */
-.journey-details-card {
-  width: 100%;
-  min-height: 400px;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-card);
-  border-left: 4px solid var(--accent-primary);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: var(--shadow-card);
+  max-width: 900px;
+  height: 320px;
+  min-height: 320px;
+  margin: 4.5rem auto 0 auto;
+  padding-top: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+.box-fit {
+  position: relative;
+  width: 660px;
+  height: 260px;
+  perspective: 2400px;
+  perspective-origin: 50% 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(var(--box-scale, 0.60));
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+/* The 3D Box Coordinate System: BW=660px, BD=260px, BH=96px */
+.box3 {
+  position: absolute;
+  width: 660px;
+  height: 260px;
+  left: 0;
+  top: 100px;
+  transform-style: preserve-3d;
+  transform: rotateX(57deg) rotateZ(30deg);
+  transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+/* Common 3D Face rules */
+.box3 .f {
+  position: absolute;
+  transform-origin: 50% 100%;
+  backface-visibility: visible;
   box-sizing: border-box;
 }
 
-.card-header-bar {
+/* 1. Box Cast Shadow */
+.box-shadow {
+  position: absolute;
+  inset: -50px -40px -40px -50px;
+  transform: translateZ(-3px);
+  background: rgba(40, 25, 10, 0.45);
+  filter: blur(45px);
+  border-radius: 40px;
+  pointer-events: none;
+}
+
+/* 2. Box Floor */
+.box-floor {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #EAD3A8, #DDBF8C);
+  box-shadow: inset 0 0 55px rgba(120, 80, 30, 0.35);
+  transform: translateZ(0px);
+}
+
+/* 3. Inner Walls */
+.wall-i {
+  background: linear-gradient(180deg, #E8CFA0, #D5B37C);
+  border-top: 6px solid #F4E3C2;
+}
+
+/* Back Wall (Inner) */
+.wall-back {
+  width: 660px;
+  height: 96px;
+  left: 0;
+  top: -96px;
+  transform: translate3d(0, 0, 0px) rotateX(-90deg);
+}
+
+/* Left Wall (Inner) */
+.wall-left {
+  width: 260px;
+  height: 96px;
+  left: -130px;
+  top: 34px; /* (BD/2 - BH = 130 - 96 = 34px) */
+  transform: translate3d(0, 0, 0px) rotateZ(90deg) rotateX(-90deg);
+}
+
+/* 4. Open Lid (Hinged at top of back wall: Z=96px, tilted back -92deg) */
+.box-lid {
+  width: 660px;
+  height: 260px;
+  left: 0;
+  top: -260px;
+  transform: translate3d(0, 0, 96px) rotateX(-92deg);
+  background: linear-gradient(0deg, #E3C795, #F0DDB8);
+  border: 6px solid #D4B07A;
+  box-shadow: 0 10px 30px rgba(80, 50, 20, 0.25);
+}
+
+.box-lid .lid-stitch {
+  position: absolute;
+  inset: 22px;
+  border: 1.5px dashed rgba(122, 90, 46, 0.4);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.box-lid .stamp2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 26px;
+  font-weight: 800;
+  color: rgba(122, 90, 46, 0.45);
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 5. Standing Cards Inside the Box Cavity (CW=224px, CH=304px) */
+.box-card-3d {
+  width: 224px;
+  height: 304px;
+  transform-origin: 50% 100%;
+  transform: translate3d(0px, 0px, 0px) rotateZ(-90deg) rotateX(-90deg);
+  cursor: pointer;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(160deg, #182232 0%, #0F172A 70%, #0B1120 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 20px 45px -15px rgba(0, 0, 0, 0.65);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  color: #FFFFFF;
+  transition: 
+    transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1),
+    box-shadow 0.4s ease,
+    border-color 0.3s ease;
+  overflow: hidden;
+  outline: none;
+  backface-visibility: hidden;
+  user-select: none;
+}
+
+.box-card-3d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, transparent 45%);
+}
+
+.box-card-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.15);
+}
+
+/* Hover Effect: Smoothly rises out of the box on Z/Y axes and counter-rotates flat to face the viewer straight on */
+.box-card-3d:hover,
+.box-card-3d.is-hovered,
+.box-card-3d:focus-visible {
+  transform: translate3d(0px, 60px, 160px) rotateZ(-30deg) rotateX(-57deg) scale(1.08) !important;
+  border-color: var(--card-accent, #10B981) !important;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 30px 70px -10px rgba(0, 0, 0, 0.85),
+    0 0 40px var(--card-accent, #10B981) !important;
+  z-index: 100 !important;
+}
+
+/* Card Glowing Top Flap Line */
+.card-3d-top-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  box-shadow: 0 0 12px var(--card-accent, #10B981);
+}
+
+/* Card Internal Typography & Layout */
+.card-3d-header {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.card-company-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.card-icon-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--accent-glow);
-  border: 1px solid var(--accent-primary);
+.card-3d-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-primary);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
 }
 
-.card-company-name {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.card-step-count {
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-  background: var(--accent-glow);
-  padding: 0.3rem 0.7rem;
-  border-radius: 8px;
-  border: 1px solid var(--accent-primary);
-}
-
-.card-heading-title {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 1.35rem; /* 40% smaller card title size */
+.card-3d-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
   font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.25;
-  margin: 0;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
 }
 
-.card-body-text {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.card-tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.card-tag-item {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  padding: 0.3rem 0.65rem;
-  border-radius: 6px;
-}
-
-/* Map Column */
-.journey-right-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  width: 100%;
-}
-
-.map-canvas-wrapper {
+.card-3d-body {
   position: relative;
-  width: 100%;
-  height: 360px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-card);
-  border-radius: 24px;
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  z-index: 5;
-}
-
-.map-vector-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-size: 30px 30px;
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-}
-
-[data-theme="dark"] .map-vector-bg {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-}
-
-.map-river-shape {
-  position: absolute;
-  top: 0;
-  left: 48%;
-  width: 24px;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.2));
-  filter: blur(2px);
-  transform: skewX(-5deg);
-}
-
-.map-route-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
   z-index: 2;
-}
-
-/* Pin Markers */
-.map-pin-marker {
-  position: absolute;
-  z-index: 10;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transform: translate(-50%, -100%);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 5px;
+  margin: 1rem 0;
 }
 
-.pin-bubble {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--border-card);
+.card-3d-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.card-3d-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--card-accent, #10B981);
+  letter-spacing: -0.01em;
+}
+
+.card-3d-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.card-3d-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94A3B8;
+}
+
+.card-3d-cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+/* 6. Outer Walls */
+.wall-o {
+  background: linear-gradient(180deg, #DDBD8B, #C99F66);
+  border-top: 6px solid #F0DCB6;
+}
+
+/* Right Wall (Outer) */
+.wall-right {
+  width: 260px;
+  height: 96px;
+  left: 530px; /* BW - BD/2 = 660 - 130 = 530px */
+  top: 34px;   /* BD/2 - BH = 130 - 96 = 34px */
+  transform: translate3d(0, 0, 0px) rotateZ(-90deg) rotateX(-90deg);
+  pointer-events: none;
+}
+
+/* Front Wall (Outer with Debossed Brand Title) */
+.wall-front {
+  width: 660px;
+  height: 96px;
+  left: 0;
+  top: 164px;  /* BD - BH = 260 - 96 = 164px */
+  transform: translate3d(0, 0, 0px) rotateX(-90deg);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 15px 35px rgba(50, 30, 10, 0.35);
+  pointer-events: none;
+}
+
+.wall-front .brand {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #C39A61;
+  text-shadow: 
+    0 1.5px 0 rgba(255, 240, 212, 0.7),
+    0 -1.5px 0 rgba(106, 72, 30, 0.55);
+  user-select: none;
+}
+
+/* Responsive Scaling for the 3D Box */
+@media (max-width: 1024px) {
+  .box-fit {
+    --box-scale: 0.55;
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-section {
+    padding: 2.5rem 1rem 2rem;
+  }
+  .box-stage-container {
+    height: 240px;
+    min-height: 240px;
+  }
+  .box-fit {
+    --box-scale: 0.46;
+  }
+}
+
+@media (max-width: 520px) {
+  .box-stage-container {
+    height: 200px;
+    min-height: 200px;
+  }
+  .box-fit {
+    --box-scale: 0.38;
+  }
+}
+
+/* ─── INTERACTIVE MODAL POPUP DIALOG ─── */
+.journey-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  padding: 1.5rem;
+  z-index: 9999;
+  animation: backdropFade 0.25s ease-out forwards;
 }
 
-.pin-label-pill {
-  position: absolute;
-  bottom: -22px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  padding: 0.15rem 0.55rem;
-  border-radius: 6px;
-  font-family: 'Inter', sans-serif !important;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  pointer-events: none;
+@keyframes backdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.map-pin-marker.pin-align-center .pin-label-pill {
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
+.journey-modal-dialog {
+  width: 100%;
+  max-width: 620px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.2);
+  padding: 2rem 2.25rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  position: relative;
+  animation: dialogScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.map-pin-marker.pin-align-right .pin-label-pill {
-  left: auto;
-  right: 0;
-  transform: none;
+@keyframes dialogScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
-.map-pin-marker.pin-align-left .pin-label-pill {
-  left: 0;
-  right: auto;
-  transform: none;
-}
-
-/* ACTIVE PIN HIGH CONTRAST STATE */
-.map-pin-marker.is-active {
-  transform: translate(-50%, -110%) scale(1.2);
-  z-index: 30;
-}
-
-.map-pin-marker.is-active .pin-bubble {
-  background: var(--accent-primary);
-  border-color: var(--bg-primary);
-  color: #FFFFFF;
-  box-shadow: 0 0 25px var(--accent-glow);
-}
-
-.map-pin-marker.is-active .pin-label-pill {
-  color: #FFFFFF;
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
-}
-
-.route-travel-cursor {
-  position: absolute;
-  z-index: 25;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--accent-primary);
-  border: 3px solid #FFFFFF;
-  box-shadow: 0 0 20px var(--accent-primary);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1), top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.map-stepper-bar {
+/* Modal Top Bar */
+.modal-top-bar {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding: 0.55rem 1.35rem;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-card);
-  border-radius: 9999px;
-  box-shadow: var(--shadow-card);
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.stepper-dots-row {
+.modal-nav-arrows {
   display: flex;
   align-items: center;
   gap: 0.65rem;
 }
 
-.stepper-dot-item {
-  width: 9px;
-  height: 9px;
+.modal-arrow-btn {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-[data-theme="dark"] .stepper-dot-item {
-  background: rgba(255, 255, 255, 0.25);
+.modal-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.08);
 }
 
-.stepper-dot-item.is-active {
-  background: var(--accent-primary);
-  box-shadow: 0 0 10px var(--accent-primary);
-  transform: scale(1.3);
-}
-
-.stepper-range-text {
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.8rem;
+.modal-step-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--text-secondary);
+  color: #F8FAFC;
 }
 
-@media (max-width: 1024px) {
-  .journey-section {
-    padding: clamp(3rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
+.modal-chapter-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid;
+  letter-spacing: 0.06em;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94A3B8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+/* Modal Heading */
+.modal-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.modal-main-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.modal-subtitle-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #94A3B8;
+  margin: 0;
+}
+
+/* Metadata Table */
+.modal-meta-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+}
+
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.meta-label {
+  width: 105px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.meta-val {
+  font-family: 'Inter', sans-serif;
+  color: #E2E8F0;
+  font-weight: 600;
+}
+
+.meta-val.highlight {
+  color: #10B981;
+  font-weight: 800;
+}
+
+/* Story Description */
+.modal-details-box {
+  padding: 0.25rem 0;
+}
+
+.modal-story-paragraph {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #CBD5E1;
+  margin: 0;
+}
+
+/* Tags */
+.modal-tags-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tags-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+}
+
+.modal-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.modal-tag-chip {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+}
+
+/* Footer Actions */
+.modal-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 1rem;
+}
+
+.modal-copy-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.6rem 1.15rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.modal-copy-btn.is-copied {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.modal-next-btn {
+  border: none;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.6rem 1.25rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.modal-next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .isometric-box-wrapper {
+    max-width: 720px;
   }
-  .journey-side-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .box-standing-card {
+    width: 155px;
+    height: 230px;
   }
-  /* Dependent Column Ordering: Interactive Map on TOP, Selected Milestone Card directly BELOW */
-  .journey-right-column {
-    order: 1;
-    width: 100%;
+  .card-title-text {
+    font-size: 0.95rem;
   }
-  .journey-details-card {
-    order: 2;
-    width: 100%;
-    max-width: 100%;
-    min-height: auto;
+}
+
+@media (max-width: 720px) {
+  .isometric-box-stage {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 1.5rem;
+  }
+  .isometric-box-wrapper {
+    min-width: 680px;
   }
 }
 
 @media (max-width: 640px) {
-  .journey-section {
-    padding: 2.75rem 1rem;
+  .journey-modal-dialog {
+    padding: 1.5rem;
+    max-height: 90vh;
+    overflow-y: auto;
   }
-  .journey-details-card {
-    padding: 1.25rem;
-    min-height: auto;
+  .modal-main-title {
+    font-size: 1.3rem;
   }
-  .card-heading-title {
-    font-size: 1.15rem;
+  .meta-row {
+    flex-direction: column;
+    gap: 0.2rem;
   }
-  .map-canvas-wrapper {
-    height: 310px;
-    border-radius: 18px;
+  .meta-label {
+    width: auto;
   }
-}
-
-@media (max-width: 360px) {
-  .journey-section {
-    padding: 2.25rem 0.75rem;
+  .modal-footer-bar {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .map-canvas-wrapper {
-    height: 270px;
-  }
-  .stepper-range-text {
-    font-size: 0.72rem;
+  .modal-copy-btn, .modal-next-btn {
+    justify-content: center;
+    width: 100%;
   }
 }

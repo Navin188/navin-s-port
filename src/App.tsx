@@ -5,6 +5,7 @@ import Journey from './Journey';
 import CalculatedChaos from './CalculatedChaos';
 import Projects from './Projects';
 import TechnicalSkills from './TechnicalSkills';
+import TechCameraRoll from './TechCameraRoll';
 import NoteWall from './NoteWall';
 import ReelsSection from './ReelsSection';
 import Footer from './Footer';
@@ -52,7 +53,10 @@ export function App() {
       {/* 6. Technical Skills — Boot Sequence */}
       <TechnicalSkills />
 
-      {/* 7. Interactive Note Wall */}
+      {/* 7. Technologies I Aware About (Camera Roll Feature) */}
+      {/* <TechCameraRoll /> */}
+
+      {/* 8. Interactive Note Wall */}
       <NoteWall />
 
       {/* 8. Dynamic Reels Section (Corporate & Fun / Poetry & Feelings) */}

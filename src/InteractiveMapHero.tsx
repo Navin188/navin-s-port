@@ -145,42 +145,36 @@ export function InteractiveMapHero() {
     document.documentElement.setAttribute('data-theme', nextTheme);
   };
 
-  // GSAP Fly-In Zoom & Fade Transition
-  const handleScrollFlyIn = () => {
-    if (!aspectContainerRef.current) return;
-    gsap.to(aspectContainerRef.current, {
-      scale: 3,
-      opacity: 0,
-      duration: 1.2,
-      ease: 'power3.inOut',
-      onComplete: () => {
-        const nextSection = document.getElementById('about-section') || document.getElementById('about');
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-        }
-        setTimeout(() => {
-          gsap.set(aspectContainerRef.current, { scale: 1, opacity: 1 });
-        }, 1500);
-      }
-    });
+  // Smooth scroll to next section (About)
+  const handleScrollToAbout = () => {
+    const nextSection = document.getElementById('about-section') || document.getElementById('about');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    }
   };
 
-  // Wheel Scroll Trigger connection
+  // Subtle GSAP Parallax on scroll — keeps hero 100% visible with zero black screen glitch
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 25) {
-        handleScrollFlyIn();
-      }
-    };
+    const aspect = aspectContainerRef.current;
     const wrapper = wrapperRef.current;
-    if (wrapper) {
-      wrapper.addEventListener('wheel', handleWheel, { passive: true });
-    }
-    return () => {
-      if (wrapper) wrapper.removeEventListener('wheel', handleWheel);
-    };
+    if (!aspect || !wrapper) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(aspect, {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }, wrapper);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -294,9 +288,9 @@ export function InteractiveMapHero() {
         </div>
       )}
 
-      {/* 5. Bottom Center 'Scroll to Fly In' Pill */}
-      <div className="map-flyin-pill" onClick={handleScrollFlyIn}>
-        <span>🖱️</span> scroll to Fly In <span>↓</span>
+      {/* 5. Bottom Center 'Scroll to Explore' Pill */}
+      <div className="map-flyin-pill" onClick={handleScrollToAbout} role="button" tabIndex={0}>
+        <span>Explore Portfolio</span> <span>↓</span>
       </div>
     </div>
   );
