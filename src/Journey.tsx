@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   X,
   ChevronLeft,
@@ -79,6 +79,7 @@ export const Journey = () => {
   const [activeModalId, setActiveModalId] = useState<number | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Close modal on Escape key
   useEffect(() => {
@@ -88,6 +89,42 @@ export const Journey = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  // Clear hover timer on unmount or whenever modal state changes
+  useEffect(() => {
+    return () => {
+      if (hoverTimerRef.current) {
+        clearTimeout(hoverTimerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  }, [activeModalId]);
+
+  const handleCardMouseEnter = (id: number) => {
+    setHoveredCardId(id);
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+    }
+    // Automatically open popup after 1 second of hover
+    hoverTimerRef.current = setTimeout(() => {
+      setActiveModalId(id);
+      hoverTimerRef.current = null;
+    }, 1000);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredCardId(null);
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
 
   const activeMilestone =
     JOURNEY_ITEMS.find((item) => item.id === activeModalId) || null;
@@ -125,7 +162,7 @@ export const Journey = () => {
           Career <span>Journey</span>
         </h2>
         <p className="journey-subtitle">
-          Real milestones from education to full-stack engineering. Pick a card from the box.
+          Real milestones from education to full-stack engineering. Hover over any card for 1 second to reveal details.
         </p>
       </div>
 
@@ -162,19 +199,24 @@ export const Journey = () => {
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => setActiveModalId(item.id)}
-                  onMouseEnter={() => setHoveredCardId(item.id)}
-                  onMouseLeave={() => setHoveredCardId(null)}
-                  onFocus={() => setHoveredCardId(item.id)}
-                  onBlur={() => setHoveredCardId(null)}
+                  onMouseEnter={() => handleCardMouseEnter(item.id)}
+                  onMouseLeave={handleCardMouseLeave}
+                  onFocus={() => handleCardMouseEnter(item.id)}
+                  onBlur={handleCardMouseLeave}
                   className={`f box-card-3d ${isHovered ? 'is-hovered' : ''}`}
                   style={{
                     left: `${leftPos}px`,
                     top: `${topPos}px`,
                     '--card-accent': item.accentColor,
                   } as React.CSSProperties}
-                  aria-label={`${item.title} at ${item.subtitle}, open milestone details`}
+                  aria-label={`${item.title} at ${item.subtitle}, hover for 1 second to open details`}
                 >
+                  {/* 1-Second Hover Progress Indicator */}
+                  <div
+                    className={`card-hover-progress ${isHovered ? 'is-animating' : ''}`}
+                    style={{ background: item.accentColor }}
+                  />
+
                   {/* Glowing Top Flap Accent Line */}
                   <div
                     className="card-3d-top-glow"
@@ -198,14 +240,14 @@ export const Journey = () => {
                     <div className="card-3d-subtitle">@{item.subtitle}</div>
                   </div>
 
-                  {/* Card Footer: Period & Click Hint */}
+                  {/* Card Footer: Period & Hover Status */}
                   <div className="card-3d-footer">
                     <span className="card-3d-period">{item.period}</span>
                     <span
-                      className="card-3d-cta"
+                      className={`card-3d-cta ${isHovered ? 'is-counting' : ''}`}
                       style={{ color: item.accentColor }}
                     >
-                      Open ↗
+                      {isHovered ? 'Opening in 1s...' : 'Hover 1s ↗'}
                     </span>
                   </div>
                 </button>

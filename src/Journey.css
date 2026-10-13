@@ -342,6 +342,49 @@
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-3d-cta.is-counting {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  animation: ctaCountingPulse 1s ease-in-out infinite;
+}
+
+@keyframes ctaCountingPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(0.97); }
+}
+
+/* 1-Second Hover Countdown Progress Bar (across bottom of card) */
+.card-hover-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: var(--card-accent, #10B981);
+  box-shadow: 0 0 14px var(--card-accent, #10B981);
+  z-index: 10;
+  pointer-events: none;
+  border-radius: 0 0 22px 22px;
+}
+
+.card-hover-progress.is-animating {
+  animation: cardHoverTimerBar 1s linear forwards;
+}
+
+@keyframes cardHoverTimerBar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 /* 6. Outer Walls */

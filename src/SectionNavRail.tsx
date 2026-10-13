@@ -14,7 +14,7 @@ const SECTIONS: NavSection[] = [
   { id: 'chaos-section',        label: 'Off The Clock' },
   { id: 'projects',             label: 'Projects' },
   { id: 'technical-skills',     label: 'Technical Stack' },
-  { id: 'technologies-section', label: 'Tech Camera Roll' },
+  // { id: 'technologies-section', label: 'Tech Camera Roll' },
   { id: 'note-wall-section',    label: 'Note Wall' },
   { id: 'reels-section',        label: 'Reels' },
   { id: 'footer-section',       label: 'Footer' },

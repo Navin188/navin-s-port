@@ -5,7 +5,7 @@ import Journey from './Journey';
 import CalculatedChaos from './CalculatedChaos';
 import Projects from './Projects';
 import TechnicalSkills from './TechnicalSkills';
-import TechCameraRoll from './TechCameraRoll';
+// import TechCameraRoll from './TechCameraRoll';
 import NoteWall from './NoteWall';
 import ReelsSection from './ReelsSection';
 import Footer from './Footer';
